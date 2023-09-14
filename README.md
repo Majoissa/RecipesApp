@@ -4,8 +4,8 @@
 
 ## To do list
 
-[ https://docs.google.com/spreadsheets/d/1vdM2pbHShDztcnumRLx1tYVWHlEN77bvHK-1AdKdGow/edit?usp=sharing ]
+- https://docs.google.com/spreadsheets/d/1vdM2pbHShDztcnumRLx1tYVWHlEN77bvHK-1AdKdGow/edit?usp=sharing
 
 ## Trello
 
-[ https://trello.com/w/joviat6 ]
+- https://trello.com/w/joviat6
