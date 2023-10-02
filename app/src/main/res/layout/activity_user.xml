@@ -6,4 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".UserActivity">
 
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="104dp"
+        android:layout_height="99dp"
+        android:background="@null"
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/flecha"
+        tools:layout_editor_absoluteX="-1dp"
+        tools:layout_editor_absoluteY="-4dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
