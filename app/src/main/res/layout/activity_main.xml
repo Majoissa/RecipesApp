@@ -20,46 +20,38 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="121dp"
-        android:layout_height="54dp"
+        android:layout_width="120dp"
+        android:layout_height="51dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.992"
-        app:srcCompat="@drawable/logo_app" />
+        app:srcCompat="@drawable/logo_perfil" />
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="121dp"
-        android:layout_height="54dp"
+        android:layout_width="127dp"
+        android:layout_height="71dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.944"
+        app:layout_constraintHorizontal_bias="0.943"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.992"
-        app:srcCompat="@drawable/logo_app" />
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/logo_favoritos" />
 
     <ImageView
         android:id="@+id/imageView4"
         android:layout_width="121dp"
-        android:layout_height="54dp"
+        android:layout_height="51dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.055"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.992"
-        app:srcCompat="@drawable/logo_app" />
-
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="255dp"
-        android:layout_height="336dp"
-        app:srcCompat="@drawable/logo_perfil"
-        tools:layout_editor_absoluteX="140dp"
-        tools:layout_editor_absoluteY="319dp" />
+        app:srcCompat="@drawable/logo_lupa" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
