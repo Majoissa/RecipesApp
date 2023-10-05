@@ -1,19 +1,3 @@
-/*package com.majoissa.yummee;
-
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.os.Bundle;
-
-public class RegisterActivity extends AppCompatActivity {
-
-   @Override
-   protected void onCreate(Bundle savedInstanceState) {
-     super.onCreate(savedInstanceState);
-     setContentView(R.layout.register_activity);
-    }
-}
-*/
-
 package com.majoissa.yummee;
 
 import androidx.annotation.NonNull;
@@ -74,6 +58,3 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 }
-
-
-
