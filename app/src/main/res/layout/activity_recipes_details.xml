@@ -6,8 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".RecipesDetailsActivity">
 
-    <?xml version="1.0" encoding="utf-8"?>
-
     <View
         android:id="@+id/view11"
         android:layout_width="414dp"
@@ -21,27 +19,30 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <ImageButton
-        android:id="@+id/imageButton14"
+        android:id="@+id/imageButton16"
         android:layout_width="72dp"
         android:layout_height="64dp"
+        android:layout_marginTop="2dp"
         android:background="@null"
         android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="@+id/view11"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/home"
-        tools:layout_editor_absoluteY="827dp" />
+        app:layout_constraintTop_toTopOf="@+id/view11"
+        app:srcCompat="@drawable/home" />
 
     <ImageButton
         android:id="@+id/imageButton11"
         android:layout_width="51dp"
         android:layout_height="37dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="8dp"
         android:background="@null"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.115"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView3"
         app:srcCompat="@drawable/compartir" />
 
     <ImageButton
@@ -88,10 +89,12 @@
         android:layout_height="33dp"
         android:fontFamily="@font/amaranth"
         android:text="Tiempo de duracion: "
+        app:layout_constraintBottom_toBottomOf="@+id/imageView"
         app:layout_constraintEnd_toStartOf="@+id/ratingRecipes"
-        app:layout_constraintHorizontal_bias="0.275"
+        app:layout_constraintHorizontal_bias="0.216"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="251dp" />
+        app:layout_constraintTop_toBottomOf="@+id/imageButton10"
+        app:layout_constraintVertical_bias="0.945" />
 
     <RatingBar
         android:id="@+id/ratingRecipes"
@@ -139,8 +142,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="229dp"
                 android:layout_gravity="center"
-                android:layout_margin="16dp"
-                android:src="https://www.youtube.com/watch?v=xlB8o0HsYcQ" />
+                android:layout_margin="16dp" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -154,14 +156,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
-                android:text="250 gramos de pasta fettuccine, 2 pechugas de pollo, cortadas en trozos, 2 cucharadas de mantequilla, 2 dientes de ajo, picados, 1 taza de crema de leche (nata líquida), 1/2 taza de queso parmesano rallado />
+                android:text="250 gramos de pasta fettuccine, 2 pechugas de pollo, cortadas en trozos, 2 cucharadas de mantequilla, 2 dientes de ajo, picados, 1 taza de crema de leche (nata líquida), 1/2 taza de queso parmesano rallado" />
 
             <TextView
-                android:id=" />@+id/directions"
-            android:layout_width="88dp"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/amaranth"
-            android:text="Directions" />
+                android:id="@+id/directions"
+                android:layout_width="88dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/amaranth"
+                android:text="Directions" />
 
             <TextView
                 android:id="@+id/textView12"
@@ -204,7 +206,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="18dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginRight="8dp"
                     android:background="@null"
@@ -213,28 +215,19 @@
 
             </RelativeLayout>
 
-
-            <!-- Título de "Comentarios" -->
-
-            <!-- Contenedor de comentarios existentes -->
-
-            <!-- Campo de entrada para comentarios -->
-
-            <!-- Botón para agregar comentarios -->
-
-
-            <!-- Otros elementos que desees agregar -->
-
         </LinearLayout>
     </ScrollView>
 
     <ScrollView
-        android:layout_width="404dp"
-        android:layout_height="237dp"
+        android:id="@+id/scrollView3"
+        android:layout_width="417dp"
+        android:layout_height="265dp"
+        android:layout_marginTop="290dp"
         android:layout_marginEnd="5dp"
+        app:layout_constraintBottom_toTopOf="@+id/imageButton12"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="573dp">
+        app:layout_constraintTop_toTopOf="@+id/scrollView2">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -293,11 +286,17 @@
         android:id="@+id/imageButton10"
         android:layout_width="67dp"
         android:layout_height="47dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="18dp"
+        android:layout_marginBottom="1dp"
         android:background="@null"
         android:scaleType="fitCenter"
-        app:srcCompat="@drawable/_4517"
-        tools:layout_editor_absoluteX="24dp"
-        tools:layout_editor_absoluteY="2dp" />
+        app:layout_constraintBottom_toTopOf="@+id/imageView"
+        app:layout_constraintEnd_toStartOf="@+id/textView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/_4517" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
