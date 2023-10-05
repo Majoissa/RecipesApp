@@ -59,6 +59,56 @@
         app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/logo_favoritos" />
 
+    <View
+        android:id="@+id/view11"
+        android:layout_width="414dp"
+        android:layout_height="66dp"
+        android:background="#FFD8A9"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.666"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <ImageButton
+        android:id="@+id/imageButton14"
+        android:layout_width="72dp"
+        android:layout_height="64dp"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/home"
+        tools:layout_editor_absoluteY="827dp" />
+
+    <ImageButton
+        android:id="@+id/imageButton11"
+        android:layout_width="51dp"
+        android:layout_height="37dp"
+        android:layout_marginBottom="16dp"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.115"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/compartir" />
+
+    <ImageButton
+        android:id="@+id/imageButton12"
+        android:layout_width="74dp"
+        android:layout_height="71dp"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.916"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/logo_favoritos" />
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="193dp"
@@ -159,7 +209,7 @@
                 android:text="250 gramos de pasta fettuccine, 2 pechugas de pollo, cortadas en trozos, 2 cucharadas de mantequilla, 2 dientes de ajo, picados, 1 taza de crema de leche (nata líquida), 1/2 taza de queso parmesano rallado" />
 
             <TextView
-                android:id="@+id/directions"
+                android:id=" @+id/directions"
                 android:layout_width="88dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/amaranth"
@@ -184,10 +234,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <!-- Button "Info Nutritional" anclado al extremo izquierdo -->
-
-                <!-- ImageButton "Share" anclado al extremo derecho -->
-
                 <Button
                     android:id="@+id/button3"
                     android:layout_width="150dp"
@@ -206,7 +252,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
-                    android:layout_marginTop="18dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginRight="8dp"
                     android:background="@null"
@@ -214,7 +260,6 @@
                     tools:foregroundGravity="center" />
 
             </RelativeLayout>
-
         </LinearLayout>
     </ScrollView>
 
@@ -296,7 +341,9 @@
         app:layout_constraintEnd_toStartOf="@+id/textView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/_4517" />
+        app:srcCompat="@drawable/_4517"
+        tools:layout_editor_absoluteX="24dp"
+        tools:layout_editor_absoluteY="2dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
