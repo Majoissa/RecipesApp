@@ -3,6 +3,9 @@
     <array name="preloaded_fonts" translatable="false">
         <item>@font/amaranth</item>
         <item>@font/amaranth_bold</item>
+
         <item>@font/baloo_bhai</item>
+=======
+>>>>>>> Stashed changes
     </array>
 </resources>
