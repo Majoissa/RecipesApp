@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#00FFFFFF"
+    tools:context=".RecipeTemplate">
+
+    <ScrollView
+        android:id="@+id/scrollView4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#FFFFFF">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#FFFFFF">
+
+                <EditText
+                    android:id="@+id/editTextTextMultiLine2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#ffffff"
+                    android:ems="10"
+                    android:gravity="start|top"
+                    android:hint="-Lorem ipsum sit amet"
+                    android:inputType="textMultiLine"
+                    android:singleLine="false"
+                    android:textColor="#000000"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView10" />
+
+                <ImageView
+                    android:id="@+id/imageView10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="223dp"
+                    android:layout_marginBottom="32dp"
+                    android:clickable="true"
+                    android:contentDescription="Template to add recipe photo"
+                    android:foreground="@android:drawable/ic_menu_add"
+                    android:foregroundGravity="center|fill"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/_c402a05422cb0d6ebd7711f7f3bbea2"
+                    app:layout_constraintBottom_toTopOf="@+id/textView9"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/editTextTime4"
+                    android:layout_width="167dp"
+                    android:layout_height="55dp"
+                    android:layout_marginBottom="12dp"
+                    android:background="#ffffff"
+                    android:ems="10"
+                    android:fontFamily="@font/baloo_bhai"
+                    android:hint="Time: -- min"
+                    android:inputType="time"
+                    android:textAlignment="center"
+                    android:textColor="#000000"
+                    android:textSize="24sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageView10"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.065"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="32dp"
+                    android:fontFamily="@font/baloo_bhai"
+                    android:text="Add a video link"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView10" />
+
+                <TextView
+                    android:id="@+id/textView10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/baloo_bhai"
+                    android:text="Ingredients"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/videoView2" />
+
+                <VideoView
+                    android:id="@+id/videoView2"
+                    android:layout_width="300dp"
+                    android:layout_height="201dp"
+                    android:layout_marginTop="15dp"
+                    android:clickable="true"
+                    android:foreground="@android:drawable/ic_menu_add"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView9" />
+
+                <TextView
+                    android:id="@+id/textView12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="42dp"
+                    android:fontFamily="@font/baloo_bhai"
+                    android:text="Directions"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/editTextTextMultiLine2" />
+
+                <EditText
+                    android:id="@+id/editTextTextMultiLine3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#ffffff"
+                    android:ems="10"
+                    android:gravity="start|top"
+                    android:hint="-Lorem ipsum sit amet"
+                    android:inputType="textMultiLine"
+                    android:textColor="#000000"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView12" />
+
+                <Button
+                    android:id="@+id/button3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="46dp"
+                    android:layout_marginBottom="36dp"
+                    android:backgroundTint="#FFD8A9"
+                    android:text="Nutritional Info"
+                    android:textColor="#000000"
+                    android:textColorHighlight="#FFFFFF"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/editTextTextMultiLine3" />
+
+                <Button
+                    android:id="@+id/button4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="48dp"
+                    android:layout_marginEnd="52dp"
+                    android:layout_marginBottom="32dp"
+                    android:backgroundTint="#D0DFD6"
+                    android:text="Upload"
+                    android:textColor="#000000"
+                    android:textColorHighlight="#FFFFFF"
+                    app:icon="@android:drawable/ic_menu_upload"
+                    app:iconSize="30dp"
+                    app:iconTint="#000000"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/editTextTextMultiLine3" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/linearLayout4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:orientation="horizontal"
+        android:scrollbarAlwaysDrawHorizontalTrack="false"
+        android:scrollbarAlwaysDrawVerticalTrack="false"
+        android:scrollbars="none"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/imageView9"
+            android:layout_width="69dp"
+            android:layout_height="50dp"
+            android:clickable="true"
+            app:srcCompat="?attr/homeAsUpIndicator" />
+
+        <EditText
+            android:id="@+id/editTextText"
+            android:layout_width="272dp"
+            android:layout_height="48dp"
+            android:background="#ffffff"
+            android:ems="10"
+            android:fontFamily="@font/amaranth"
+            android:inputType="text"
+            android:scrollbars="none"
+            android:singleLine="true"
+            android:text="Recipe Title"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textSize="48sp" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
