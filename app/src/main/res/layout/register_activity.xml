@@ -8,8 +8,8 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="427dp"
+        android:layout_height="928dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -52,12 +52,12 @@
         android:layout_marginTop="75dp"
         android:layout_marginBottom="136dp"
         android:background="#FFFFFF"
-        android:tint="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2"
-        tools:srcCompat="@tools:sample/avatars" />
+        tools:srcCompat="@tools:sample/avatars"
+        app:tint="#FFFFFF" />
 
     <TextView
         android:id="@+id/textView3"
@@ -88,12 +88,13 @@
     <EditText
         android:id="@+id/editTextTextEmailAddress"
         android:layout_width="316dp"
-        android:layout_height="32dp"
+        android:layout_height="48dp"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="37dp"
         android:layout_marginBottom="160dp"
         android:background="#618F8E8E"
         android:ems="10"
+        android:hint="Email"
         android:inputType="textEmailAddress"
         android:textColor="#000000"
         app:layout_constraintBottom_toTopOf="@+id/button"
@@ -104,12 +105,13 @@
     <EditText
         android:id="@+id/editTextTextPassword"
         android:layout_width="317dp"
-        android:layout_height="31dp"
+        android:layout_height="48dp"
         android:layout_marginStart="23dp"
         android:layout_marginEnd="37dp"
         android:layout_marginBottom="48dp"
         android:background="#618F8E8E"
         android:ems="10"
+        android:hint="+ 8 characters password"
         android:inputType="textPassword"
         android:textColor="#000000"
         app:layout_constraintBottom_toTopOf="@+id/button"
