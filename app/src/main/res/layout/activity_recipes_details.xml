@@ -32,20 +32,6 @@
         app:srcCompat="@drawable/home" />
 
     <ImageButton
-        android:id="@+id/imageButton11"
-        android:layout_width="51dp"
-        android:layout_height="37dp"
-        android:layout_marginBottom="8dp"
-        android:background="@null"
-        android:scaleType="fitCenter"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.115"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scrollView3"
-        app:srcCompat="@drawable/compartir" />
-
-    <ImageButton
         android:id="@+id/imageButton12"
         android:layout_width="74dp"
         android:layout_height="71dp"
@@ -88,7 +74,7 @@
         android:layout_width="84dp"
         android:layout_height="33dp"
         android:fontFamily="@font/amaranth"
-        android:text="Tiempo de duracion: "
+        android:text="Time: "
         app:layout_constraintBottom_toBottomOf="@+id/imageView"
         app:layout_constraintEnd_toStartOf="@+id/ratingRecipes"
         app:layout_constraintHorizontal_bias="0.216"
@@ -103,7 +89,7 @@
         android:layout_marginTop="176dp"
         android:background="@color/black"
         android:backgroundTint="@color/yellow"
-        android:progressTint="@color/white"
+        android:progressTint="@color/yelloww"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.898"
         app:layout_constraintStart_toStartOf="parent"
@@ -111,12 +97,14 @@
 
     <ScrollView
         android:id="@+id/scrollView2"
-        android:layout_width="wrap_content"
-        android:layout_height="277dp"
+        android:layout_width="410dp"
+        android:layout_height="210dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.487">
 
         <!-- Contenedor principal lineal vertical -->
         <LinearLayout
@@ -134,6 +122,8 @@
                 android:id="@+id/textView2"
                 android:layout_width="102dp"
                 android:layout_height="32dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="30dp"
                 android:fontFamily="@font/amaranth"
                 android:text="Recipe-Video" />
 
@@ -147,6 +137,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
                 android:fontFamily="@font/amaranth"
                 android:text="Ingredients"
                 android:textSize="16dp" />
@@ -155,20 +146,15 @@
                 android:id="@+id/ingredientes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="20dp"
                 android:padding="10dp"
                 android:text="250 gramos de pasta fettuccine, 2 pechugas de pollo, cortadas en trozos, 2 cucharadas de mantequilla, 2 dientes de ajo, picados, 1 taza de crema de leche (nata líquida), 1/2 taza de queso parmesano rallado" />
-
-            <TextView
-                android:id="@+id/directions"
-                android:layout_width="88dp"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/amaranth"
-                android:text="Directions" />
 
             <TextView
                 android:id="@+id/textView12"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
                 android:fontFamily="@font/amaranth"
                 android:text="Directions"
                 android:textSize="16dp" />
@@ -177,6 +163,7 @@
                 android:id="@+id/textView13"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="20dp"
                 android:padding="10dp"
                 android:text="To prepare Pasta Alfredo with Chicken, start by boiling a pot of water and cooking the fettuccine pasta until it's al dente. In a large skillet, melt butter over medium-high heat and cook bite-sized chicken pieces until they're golden and fully cooked. Remove the chicken from the skillet and set it aside. In the same skillet, sauté minced garlic until fragrant, then reduce the heat to medium-low and add heavy cream, grated Parmesan cheese, and grated mozzarella cheese. Stir the creamy Alfredo sauce until it thickens and the cheeses melt. Return the cooked chicken to the skillet and mix it in. " />
 
@@ -215,14 +202,16 @@
 
     <ScrollView
         android:id="@+id/scrollView3"
-        android:layout_width="417dp"
-        android:layout_height="265dp"
-        android:layout_marginTop="290dp"
+        android:layout_width="398dp"
+        android:layout_height="189dp"
+        android:layout_marginTop="220dp"
         android:layout_marginEnd="5dp"
-        app:layout_constraintBottom_toTopOf="@+id/imageButton12"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/scrollView2">
+        app:layout_constraintTop_toTopOf="@+id/scrollView2"
+        app:layout_constraintVertical_bias="0.125">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -234,6 +223,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/amaranth_bold"
+                android:padding="20dp"
                 android:paddingTop="15dp"
                 android:paddingBottom="20dp"
                 android:text="Comments"
@@ -242,7 +232,8 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:padding="25dp">
 
             </androidx.recyclerview.widget.RecyclerView>
 
@@ -251,6 +242,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/amaranth_bold"
+                android:padding="20dp"
                 android:paddingTop="15dp"
                 android:paddingBottom="20dp"
                 android:text="Let us a comment"
@@ -260,9 +252,11 @@
                 android:id="@+id/editTextText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="20dp"
                 android:ems="10"
                 android:hint="Your message here"
-                android:inputType="text" />
+                android:inputType="text"
+                android:padding="20dp" />
 
             <Button
                 android:id="@+id/button4"
@@ -292,6 +286,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/_4517" />
+
+    <ImageButton
+        android:id="@+id/imageButton11"
+        android:layout_width="51dp"
+        android:layout_height="37dp"
+        android:layout_marginTop="13dp"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.113"
+        app:layout_constraintStart_toStartOf="@+id/view11"
+        app:layout_constraintTop_toTopOf="@+id/view11"
+        app:srcCompat="@drawable/compartir" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
