@@ -7,6 +7,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class UserActivity extends AppCompatActivity {
 
@@ -14,17 +18,24 @@ public class UserActivity extends AppCompatActivity {
     private ImageButton home;
     private ImageButton logout;
     private ImageButton back;
+    private TextView userName;
+    private FirebaseAuth mAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
 
+        mAuth = FirebaseAuth.getInstance();
+
+        userName = findViewById(R.id.textView5);
         logout = findViewById(R.id.imageButton2);
         home = findViewById(R.id.imageButton4);
         back = findViewById(R.id.imageButton);
 
         buttons = new Buttons(this);
 
+        String email = mAuth.getCurrentUser().getEmail();
+        userName.setText(email);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
