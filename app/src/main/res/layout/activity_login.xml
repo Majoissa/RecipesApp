@@ -49,13 +49,14 @@
         android:id="@+id/imageView7"
         android:layout_width="306dp"
         android:layout_height="492dp"
+        android:background="#FFFFFF"
+        android:backgroundTint="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.681"
-        app:srcCompat="?attr/popupMenuBackground" />
+        app:layout_constraintVertical_bias="0.681" />
 
     <TextView
         android:id="@+id/textView2"
@@ -65,11 +66,12 @@
         android:text="Register your account and Log in"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView3"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.512"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.338" />
+        app:layout_constraintVertical_bias="0.925" />
 
     <ImageView
         android:id="@+id/imageView8"
@@ -86,12 +88,13 @@
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="306dp"
-        android:layout_height="492dp"
-        android:layout_marginTop="45dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="116dp"
+        android:background="#FFFFFF"
         android:orientation="vertical"
         android:padding="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView3"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView6"
         tools:context=".MainActivity">
@@ -101,53 +104,61 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/amaranth"
-            android:text="EMAIL" />
+            android:text="EMAIL"
+            android:textColor="#000000" />
 
         <EditText
             android:id="@+id/editText"
-            android:background="#618F8E8E"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginBottom="30dp"
+            android:background="#618F8E8E"
             android:hint="Email"
-            android:padding="8dp" />
+            android:padding="8dp"
+            android:textColor="#000000"
+            android:textColorHint="#978F8F" />
 
         <TextView
             android:id="@+id/textView6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/amaranth"
-            android:text="PASSWORD" />
+            android:text="PASSWORD"
+            android:textColor="#000000" />
 
         <EditText
             android:id="@+id/editTextPassword"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginBottom="30dp"
-            android:hint="Password"
             android:background="#618F8E8E"
+            android:hint="Password"
             android:inputType="textPassword"
-            android:padding="8dp" />
+            android:padding="8dp"
+            android:textColor="#000000"
+            android:textColorHint="#978F8F" />
 
         <Button
             android:id="@+id/button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Log in"
-            android:padding="8dp"
-            android:layout_marginBottom="20dp"
             android:layout_marginTop="20dp"
-            android:backgroundTint="#FEB06A"/>
+            android:layout_marginBottom="20dp"
+            android:backgroundTint="#FEB06A"
+            android:padding="8dp"
+            android:text="Log in"
+            android:textColor="#FFFFFF" />
 
         <Button
             android:id="@+id/button2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
             android:backgroundTint="#FEB06A"
             android:padding="8dp"
-            android:layout_marginBottom="20dp"
-            android:layout_marginTop="20dp"
-            android:text="Create new account" />
+            android:text="Create new account"
+            android:textColor="#FFFFFF" />
 
 
     </LinearLayout>

@@ -24,7 +24,7 @@ public class SplashScreen extends AppCompatActivity {
             public void run() {
                 // Iniciar LoginActivity y mostrar activity_login.xml
                 startActivity(intent);
-                //finish(); // Cierra el SplashScreen
+                finish(); // Cierra el SplashScreen
             }
         }, SPLASH_DURATION);
     }
