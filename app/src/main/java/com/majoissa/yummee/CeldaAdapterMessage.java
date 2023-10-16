@@ -9,8 +9,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.majoissa.yummee.CeldaMessage;
-
 import java.util.List;
 
 public class CeldaAdapterMessage extends RecyclerView.Adapter<CeldaAdapterMessage.ViewHolder> {
