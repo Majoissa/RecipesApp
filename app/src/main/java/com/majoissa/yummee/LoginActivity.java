@@ -17,8 +17,6 @@ public class LoginActivity extends AppCompatActivity {
     private EditText editTextEmail;
     private EditText editTextPassword;
 
-    private FirebaseAuth mAuth;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,27 +27,28 @@ public class LoginActivity extends AppCompatActivity {
         Button buttonLogin = findViewById(R.id.button);
         TextView textViewCreateAccount = findViewById(R.id.button2);
 
-        mAuth = FirebaseAuth.getInstance();
-
         buttonLogin.setOnClickListener(view -> {
             String email = editTextEmail.getText().toString();
             String password = editTextPassword.getText().toString();
 
-            // Iniciar sesión con Firebase
-            mAuth.signInWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(LoginActivity.this, task -> {
-                        if (task.isSuccessful()) {
-                            // Inicio de sesión exitoso, redirigir a la actividad principal o realizar otras acciones
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            // Ejemplo de redirección a una actividad principal
-                            Intent intent = new Intent(LoginActivity.this, Main.class);
-                            startActivity(intent);
-                            finish();
-                        } else {
-                            // Error en el inicio de sesión
-                            Toast.makeText(LoginActivity.this, "Error en el inicio de sesión", Toast.LENGTH_SHORT).show();
-                        }
-                    });
+            // Llama al método loginUser de FirebaseUtilities
+            FirebaseUtilities.loginUser(email, password, new FirebaseUtilities.FirebaseLoginCallback() {
+                @Override
+                public void onSuccess() {
+                    // Inicio de sesión exitoso, redirigir a la actividad principal o realizar otras acciones
+                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                    // Ejemplo de redirección a una actividad principal
+                    Intent intent = new Intent(LoginActivity.this, Main.class);
+                    startActivity(intent);
+                    finish();
+                }
+
+                @Override
+                public void onError(Exception exception) {
+                    // Error en el inicio de sesión
+                    Toast.makeText(LoginActivity.this, "Error en el inicio de sesión", Toast.LENGTH_SHORT).show();
+                }
+            });
         });
 
         textViewCreateAccount.setOnClickListener(view -> {
