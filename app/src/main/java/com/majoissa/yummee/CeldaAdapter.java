@@ -32,7 +32,12 @@ public class CeldaAdapter extends RecyclerView.Adapter<CeldaAdapter.ViewHolder> 
         holder.titul.setText(celda.getTexto());
         holder.valoracio.setRating(celda.getImagenResId2());
         holder.totalreviews.setText(celda.getTexto2());
-
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Buttons.RecipeDetails(view);
+            }
+        });
     }
 
     @Override
