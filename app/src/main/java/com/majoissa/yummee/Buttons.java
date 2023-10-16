@@ -20,4 +20,9 @@ public class Buttons {
         Intent i = new Intent(context, UserActivity.class);
         context.startActivity(i);
     }
+
+    public void LogoutButton(View v){
+        Intent i = new Intent(context, LoginActivity.class);
+        context.startActivity(i);
+    }
 }
