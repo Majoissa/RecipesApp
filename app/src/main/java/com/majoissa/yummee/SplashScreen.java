@@ -18,7 +18,7 @@ public class SplashScreen extends AppCompatActivity {
         setContentView(R.layout.splashscreen_activity);
         // Crear una intención para la LoginActivity
         Intent intent = new Intent(this, LoginActivity.class);
-        Toast.makeText(this, "Esto funciona", Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, "Esto funciona", Toast.LENGTH_LONG).show();
        new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
