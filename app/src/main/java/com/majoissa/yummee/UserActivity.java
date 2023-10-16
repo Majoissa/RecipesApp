@@ -87,6 +87,7 @@ public class UserActivity extends AppCompatActivity {
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                FirebaseAuth.getInstance().signOut();
                 buttons.LogoutButton(view);
                 logout.setEnabled(true);
             }
