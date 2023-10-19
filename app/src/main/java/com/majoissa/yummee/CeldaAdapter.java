@@ -1,5 +1,4 @@
 package com.majoissa.yummee;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +7,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import com.bumptech.glide.Glide; // Importa Glide
 import java.util.List;
 
 public class CeldaAdapter extends RecyclerView.Adapter<CeldaAdapter.ViewHolder> {
@@ -28,16 +28,16 @@ public class CeldaAdapter extends RecyclerView.Adapter<CeldaAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Celda celda = celdas.get(position);
-        holder.imatge.setImageResource(celda.getImagenResId());
-        holder.titul.setText(celda.getTexto());
-        holder.valoracio.setRating(celda.getImagenResId2());
-        holder.totalreviews.setText(celda.getTexto2());
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Buttons.RecipeDetails(view);
-            }
-        });
+        holder.titul.setText(celda.getRecipe_name());
+
+        double calificacion = celda.getRating_recipes()/ 2.0;
+        holder.valoracio.setRating((float) calificacion);
+        holder.totalreviews.setText(celda.getTotalReviews());
+
+        // Carga la imagen desde la URL utilizando Glide
+        Glide.with(holder.imatge.getContext())
+                .load(celda.getImg_url()) // La URL de la imagen
+                .into(holder.imatge);
     }
 
     @Override

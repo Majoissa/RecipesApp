@@ -1,60 +1,50 @@
 package com.majoissa.yummee;
-
+import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.GridLayoutManager;
-
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-
+import com.google.firebase.firestore.FirebaseFirestore; // Importa la biblioteca de Firestore
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class Main extends AppCompatActivity {
 
-    private Buttons buttons;
-    private ImageView user;
-    private ImageView favorites;
+    private RecyclerView recyclerView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        buttons = new Buttons(this);
-        user = findViewById(R.id.imageView9);
-        favorites = findViewById(R.id.imageView2);
-
-        RecyclerView recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        List<Celda> celdas = new ArrayList<>();
-        celdas.add(new Celda("KFC Inspo Food", R.drawable.ic_launcher_foreground, 3.4f,"1.600+ reviews"));
-        celdas.add(new Celda("KFC Inspo Food", R.drawable.ic_launcher_foreground, 3.5f,"1.600+ reviews"));
-        celdas.add(new Celda("KFC Inspo Food", R.drawable.ic_launcher_foreground, 3.5f,"1.600+ reviews"));
-        celdas.add(new Celda("KFC Inspo Food", R.drawable.ic_launcher_foreground, 3.5f,"1.600+ reviews"));
-        celdas.add(new Celda("KFC Inspo Food", R.drawable.ic_launcher_foreground, 3.5f,"1.600+ reviews"));
-        celdas.add(new Celda("KFC Inspo Food", R.drawable.ic_launcher_foreground, 3.5f,"1.600+ reviews"));
-
-        // Añade más celdas según lo necesario
-
-        CeldaAdapter adapter = new CeldaAdapter(celdas);
-        GridLayoutManager layoutManager = new GridLayoutManager(this,2);
+        recyclerView = findViewById(R.id.recyclerView);
+        GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(adapter);
 
+        // Configuramos el espacio (gap) entre las tarjetas
         int spacingInPixels = getResources().getDimensionPixelSize(R.dimen.grid_spacing);
-        recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, spacingInPixels, true));
+        recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, spacingInPixels, true, 0));
 
-        user.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                buttons.UserButton(view);
-            }
-        });
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        // Realiza una consulta a Firestore para obtener los documentos de la colección "recetas"
+        db.collection("2023recipesApp")
+                .get()
+                .addOnSuccessListener((QuerySnapshot queryDocumentSnapshots) -> {
+                    if (!queryDocumentSnapshots.isEmpty()) {
+                        List<Celda> celdas = new ArrayList<>();
+                        for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+                            Celda celda = document.toObject(Celda.class);
+                            celdas.add(celda);
+                        }
+                        CeldaAdapter adapter = new CeldaAdapter(celdas);
+                        recyclerView.setAdapter(adapter);
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    // Manejo de errores en caso de fallo en la consulta a Firestore
+                });
     }
 }
