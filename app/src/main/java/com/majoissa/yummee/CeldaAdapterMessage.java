@@ -37,6 +37,7 @@ public class CeldaAdapterMessage extends RecyclerView.Adapter<CeldaAdapterMessag
         holder.user.setText(celda.user);
         holder.ratingBar.setRating(celda.rating);
         holder.message.setText(celda.message);
+        holder.date.setText(celda.date);
     }
 
     @Override
@@ -50,13 +51,14 @@ public class CeldaAdapterMessage extends RecyclerView.Adapter<CeldaAdapterMessag
         TextView user;
         RatingBar ratingBar;
         TextView message;
-
+        TextView date;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             imageId = itemView.findViewById(R.id.profileimg);
             user = itemView.findViewById(R.id.user);
             ratingBar = itemView.findViewById(R.id.ratingBar);
             message = itemView.findViewById(R.id.coment);
+            date = itemView.findViewById(R.id.editTextDate);
         }
     }
 }
