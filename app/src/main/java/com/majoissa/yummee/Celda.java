@@ -2,14 +2,14 @@ package com.majoissa.yummee;
 public class Celda {
     private String recipe_name;
     private String img_url;
-    private int rating_recipes;
+    private double rating_recipes;
     private String totalReviews;
 
     public Celda() {
         // Constructor sin argumentos necesario para Firestore
     }
 
-    public Celda(String recipe_name, String img_url, int rating_recipes, String totalReviews) {
+    public Celda(String recipe_name, String img_url, double rating_recipes, String totalReviews) {
         this.recipe_name = recipe_name;
         this.img_url = img_url;
         this.rating_recipes = rating_recipes;
@@ -24,7 +24,7 @@ public class Celda {
         return img_url;
     }
 
-    public float getRating_recipes() {
+    public double getRating_recipes() {
         return rating_recipes;
     }
 
