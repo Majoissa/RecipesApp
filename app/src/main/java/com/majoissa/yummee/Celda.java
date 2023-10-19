@@ -1,30 +1,34 @@
 package com.majoissa.yummee;
 public class Celda {
-    private String texto;
-    private int imagenResId;
-    private float imagenResId2;
-    private String texto2;
+    private String recipe_name;
+    private String img_url;
+    private int rating_recipes;
+    private String totalReviews;
 
-    public Celda(String texto, int imagenResId, float imagenResId2, String texto2) {
-        this.texto = texto;
-        this.imagenResId = imagenResId;
-        this.imagenResId2 = imagenResId2;
-        this.texto2 = texto2;
+    public Celda() {
+        // Constructor sin argumentos necesario para Firestore
     }
 
-    public String getTexto() {
-        return texto;
+    public Celda(String recipe_name, String img_url, int rating_recipes, String totalReviews) {
+        this.recipe_name = recipe_name;
+        this.img_url = img_url;
+        this.rating_recipes = rating_recipes;
+        this.totalReviews = totalReviews;
     }
 
-    public int getImagenResId() {
-        return imagenResId;
+    public String getRecipe_name() {
+        return recipe_name;
     }
 
-    public float getImagenResId2() {
-        return imagenResId2;
+    public String getImg_url() {
+        return img_url;
     }
 
-    public String getTexto2() {
-        return texto2;
+    public float getRating_recipes() {
+        return rating_recipes;
+    }
+
+    public String getTotalReviews() {
+        return totalReviews;
     }
 }
