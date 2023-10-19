@@ -172,10 +172,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <!-- Button "Info Nutritional" anclado al extremo izquierdo -->
-
-                <!-- ImageButton "Share" anclado al extremo derecho -->
-
                 <Button
                     android:id="@+id/button3"
                     android:layout_width="150dp"
@@ -202,7 +198,6 @@
                     tools:foregroundGravity="center" />
 
             </RelativeLayout>
-
         </LinearLayout>
     </ScrollView>
 
