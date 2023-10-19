@@ -21,8 +21,9 @@
             <ImageView
                 android:id="@+id/profileimg"
                 android:layout_width="52dp"
-                android:layout_height="63dp"
+                android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                android:adjustViewBounds="true"
                 app:srcCompat="@drawable/logo_perfil" />
 
             <LinearLayout
@@ -47,30 +48,37 @@
                         android:text="majoissa@gmail.com"
                         android:textSize="18dp" />
 
-                    <EditText
-                        android:id="@+id/editTextDate"
+                    <TextView
+                        android:id="@+id/dateView"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:clickable="false"
-                        android:ems="10"
-                        android:inputType="date" />
+                        android:gravity="center"
+                        android:text="TextView"
+                        android:textAlignment="center" />
 
                 </LinearLayout>
 
             </LinearLayout>
+
         </LinearLayout>
 
-        <RatingBar
-            android:id="@+id/ratingBar"
-            style="@android:style/Widget.Material.RatingBar.Small"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="0"
-            android:max="5"
-            android:numStars="5"
-            tools:max="5" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <RatingBar
+                android:id="@+id/ratingBar"
+                style="@android:style/Widget.Material.RatingBar.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="0"
+                android:max="5"
+                android:numStars="5"
+                tools:max="5" />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"

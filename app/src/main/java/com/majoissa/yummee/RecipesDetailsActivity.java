@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -59,10 +61,6 @@ public class RecipesDetailsActivity extends AppCompatActivity {
 
         celdas = new ArrayList<>();
         loadComments();
-        /*celdas.add(new CeldaMessage("mj@gmail.com", 4.5f, "Buenisima la receta, para repetirla muchas veces mas!!! Muy recomendado"));
-        celdas.add(new CeldaMessage("juan@gmail.com", 3.0f, "Me gustó, pero podría mejorar."));
-        celdas.add(new CeldaMessage("luis@gmail.com", 5.0f, "Excelente, la mejor receta que he probado."));*/
-        // Añade más celdas según lo necesario
 
         adapter = new CeldaAdapterMessage(celdas);
         recyclerView.setAdapter(adapter);
@@ -90,12 +88,14 @@ public class RecipesDetailsActivity extends AppCompatActivity {
         float userRating = stars.getRating();
         String userComment = addComment.getText().toString();
         Date day = new Date();
-        day.getTime();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        String formattedDate = dateFormat.format(day);
 
         Map<String, Object> commentData = new HashMap<>();
         commentData.put("userEmail", userEmail);
         commentData.put("userRating", userRating);
         commentData.put("userComment", userComment);
+        commentData.put("day", formattedDate);
 
         // Añade el comentario como un documento en una subcolección
         db.collection("2023recipesApp").document("tartaDeAtun")
@@ -105,7 +105,7 @@ public class RecipesDetailsActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
                         Toast.makeText(RecipesDetailsActivity.this, "Comment added!", Toast.LENGTH_SHORT).show();
-                        celdas.add(new CeldaMessage(userEmail,userRating,userComment, day.toString()));
+                        celdas.add(new CeldaMessage(userEmail,userRating,userComment, formattedDate));
 
                         adapter.notifyDataSetChanged();
                     }
