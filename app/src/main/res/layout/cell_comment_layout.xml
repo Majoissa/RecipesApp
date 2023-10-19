@@ -17,7 +17,6 @@
             android:layout_width="52dp"
             android:layout_height="63dp"
             android:layout_margin="10dp"
-            android:src="@tools:sample/avatars"
             app:srcCompat="@drawable/logo_perfil" />
 
         <TextView
