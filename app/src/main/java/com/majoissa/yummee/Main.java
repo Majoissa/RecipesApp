@@ -1,8 +1,10 @@
 package com.majoissa.yummee;
 
 import android.content.Context;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -34,7 +36,6 @@ public class Main extends AppCompatActivity {
         GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(layoutManager);
 
-        // Configuramos el espacio (gap) entre las tarjetas
         int spacingInPixels = getResources().getDimensionPixelSize(R.dimen.grid_spacing);
         recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, spacingInPixels, true, 0));
 
@@ -42,24 +43,17 @@ public class Main extends AppCompatActivity {
         imageView4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Cambia la visibilidad de searchEditText y searchButton a VISIBLE
                 searchEditText.setVisibility(View.VISIBLE);
                 searchButton.setVisibility(View.VISIBLE);
-
-                // Solicita el foco para searchEditText
                 searchEditText.requestFocus();
-
-                // Abre el teclado soft
                 InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.showSoftInput(searchEditText, InputMethodManager.SHOW_IMPLICIT);
             }
         });
 
-
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Aquí puedes colocar el código para hacer algo cuando el usuario hace clic en el botón de búsqueda
                 String query = searchEditText.getText().toString().trim();
                 if (!query.isEmpty()) {
                     // Realiza la búsqueda con la cadena 'query'
@@ -67,9 +61,27 @@ public class Main extends AppCompatActivity {
             }
         });
 
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        // Detectar el estado del teclado
+        final View activityRootView = findViewById(android.R.id.content);
+        activityRootView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                Rect r = new Rect();
+                activityRootView.getWindowVisibleDisplayFrame(r);
+                int screenHeight = activityRootView.getHeight();
+                int keypadHeight = screenHeight - r.bottom;
 
-        // Realiza una consulta a Firestore para obtener los documentos de la colección "recetas"
+                if (keypadHeight > screenHeight * 0.15) {
+                    // Teclado abierto, no hacer nada
+                } else {
+                    // Teclado cerrado, ocultar EditText y Button
+                    searchEditText.setVisibility(View.GONE);
+                    searchButton.setVisibility(View.GONE);
+                }
+            }
+        });
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("2023recipesApp")
                 .get()
                 .addOnSuccessListener((QuerySnapshot queryDocumentSnapshots) -> {
