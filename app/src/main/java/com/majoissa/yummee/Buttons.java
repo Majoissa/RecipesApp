@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.view.View;
 
+import java.util.HashMap;
+
 public class Buttons {
     private static Context context; // Agrega un campo para el contexto
 
