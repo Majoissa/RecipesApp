@@ -29,7 +29,9 @@ public class CeldaAdapter extends RecyclerView.Adapter<CeldaAdapter.ViewHolder> 
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Celda celda = celdas.get(position);
         holder.titul.setText(celda.getRecipe_name());
-        holder.valoracio.setRating(celda.getRating_recipes());
+
+        double calificacion = celda.getRating_recipes()/ 2.0;
+        holder.valoracio.setRating((float) calificacion);
         holder.totalreviews.setText(celda.getTotalReviews());
 
         // Carga la imagen desde la URL utilizando Glide
