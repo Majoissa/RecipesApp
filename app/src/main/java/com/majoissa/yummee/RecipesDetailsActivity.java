@@ -8,14 +8,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageButton;
 
 public class RecipesDetailsActivity extends AppCompatActivity {
 
+    private Buttons buttons;
+    private ImageButton home;
+    private ImageButton back;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipes_details);
 
+        buttons = new Buttons(this);
+        home = findViewById(R.id.imageButton16);
+        back = findViewById(R.id.imageButton10);
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -27,5 +35,18 @@ public class RecipesDetailsActivity extends AppCompatActivity {
 
         CeldaAdapterMessage adapter = new CeldaAdapterMessage(celdas);
         recyclerView.setAdapter(adapter);
+
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                buttons.HomeButton(view);
+            }
+        });
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
     }
 }
