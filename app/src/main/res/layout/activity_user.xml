@@ -115,11 +115,11 @@
                 android:id="@+id/textView5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="42dp"
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/amaranth_bold"
                 android:text="username@mail.com"
                 android:textSize="20sp"
+                app:autoSizeTextType="uniform"
                 app:layout_constraintStart_toEndOf="@+id/imageView11"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -135,6 +135,20 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageView11" />
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="228dp" />
+
+        <TextView
+            android:id="@+id/textView14"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/amaranth"
+            android:text="Your recipes will go here."
+            android:textAlignment="center"
+            android:textColor="#A96E6868"
+            android:textSize="34sp" />
     </LinearLayout>
 
     <Space
