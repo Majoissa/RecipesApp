@@ -8,7 +8,6 @@ public class Celda {
     public Celda() {
         // Constructor sin argumentos necesario para Firestore
     }
-
     public Celda(String recipe_name, String img_url, double rating_recipes, String totalReviews) {
         this.recipe_name = recipe_name;
         this.img_url = img_url;
