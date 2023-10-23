@@ -56,7 +56,7 @@ public class CeldaAdapterMessage extends RecyclerView.Adapter<CeldaAdapterMessag
             user = itemView.findViewById(R.id.user);
             ratingBar = itemView.findViewById(R.id.ratingBar);
             message = itemView.findViewById(R.id.coment);
-            date = itemView.findViewById(R.id.editTextDate);
+            date = itemView.findViewById(R.id.dateView);
         }
     }
 }

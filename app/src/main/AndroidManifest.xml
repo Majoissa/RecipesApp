@@ -22,9 +22,7 @@
 
         <activity
             android:name=".RecipeTemplate"
-            android:exported="true" />
-
-
+            android:exported="false" />
         <activity
             android:name=".SplashScreen"
             android:exported="true" >
