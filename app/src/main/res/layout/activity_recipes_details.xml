@@ -90,7 +90,6 @@
         android:layout_marginTop="176dp"
         android:background="@color/black"
         android:backgroundTint="@color/yellow"
-        android:progressTint="@color/yelloww"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.898"
         app:layout_constraintStart_toStartOf="parent"
