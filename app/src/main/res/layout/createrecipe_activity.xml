@@ -181,6 +181,19 @@
                     app:layout_constraintStart_toEndOf="@+id/editTextTime4"
                     app:layout_constraintTop_toTopOf="parent" />
 
+                <Button
+                    android:id="@+id/add_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#FF5722"
+                    android:backgroundTint="#D3C5C5"
+                    android:text="Add image"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:ignore="MissingConstraints"
+                    tools:layout_editor_absoluteY="0dp" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>
@@ -221,16 +234,5 @@
             android:textColor="#000000"
             android:textSize="48sp" />
     </LinearLayout>
-
-    <Button
-        android:id="@+id/add_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Add image"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.054"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="50dp"
-        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
