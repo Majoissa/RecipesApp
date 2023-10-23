@@ -38,10 +38,7 @@ dependencies {
     implementation("com.google.firebase:firebase-auth:22.1.2")
     implementation("com.google.firebase:firebase-firestore-ktx")
     implementation("com.google.firebase:firebase-crashlytics-buildtools:2.9.9")
-<<<<<<< HEAD
-=======
     implementation("com.squareup.picasso:picasso:2.71828")
->>>>>>> 177fd0810e2a9c9206444f2e5d30098d63b87c1e
     implementation("com.google.firebase:firebase-storage-ktx")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
