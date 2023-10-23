@@ -18,6 +18,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
+//Esta es la clase
 public class Main extends AppCompatActivity {
 
     private RecyclerView recyclerView;
