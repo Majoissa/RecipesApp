@@ -12,6 +12,7 @@ import java.util.List;
 
 public class CeldaAdapter extends RecyclerView.Adapter<CeldaAdapter.ViewHolder> {
 
+    //aloha
     private final List<Celda> celdas;
 
     public CeldaAdapter(List<Celda> celdas) {
