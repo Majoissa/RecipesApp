@@ -14,6 +14,8 @@ public class Celda {
     }
     public Celda(String directions, String ingredients,String recipe_name, String img_url, double rating_recipes, String totalReviews,String video_url) {
         this.directions = directions;
+    }
+    public Celda(String recipe_name, String img_url, double rating_recipes, String totalReviews) {
         this.recipe_name = recipe_name;
         this.img_url = img_url;
         this.rating_recipes = rating_recipes;
@@ -24,14 +26,12 @@ public class Celda {
     public String getDocumentId() {
         return documentId;
     }
-
     public void setDocumentId(String documentId) {
         this.documentId = documentId;
     }
     public String getRecipe_name() {
         return recipe_name;
     }
-
     public String getImg_url() {
         return img_url;
     }
@@ -47,7 +47,6 @@ public class Celda {
     public double getRating_recipes() {
         return rating_recipes;
     }
-
     public String getTotalReviews() {
         return totalReviews;
     }

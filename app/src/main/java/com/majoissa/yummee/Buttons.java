@@ -4,8 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.view.View;
 
-import java.util.HashMap;
-
 public class Buttons {
     private static Context context; // Agrega un campo para el contexto
 
@@ -27,5 +25,10 @@ public class Buttons {
         Intent i = new Intent(context, LoginActivity.class);
         context.startActivity(i);
     }
-
+    public static void RecipeDetails(View v){
+        context.startActivity(new Intent(context, RecipesDetailsActivity.class));
+    }
+    public void CreateRecipe(View v){
+        context.startActivity(new Intent(context, RecipeTemplate.class));
+    }
 }

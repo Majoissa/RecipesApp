@@ -1,28 +1,27 @@
 package com.majoissa.yummee;
 
 import android.content.Context;
-import android.graphics.Rect;
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.view.ViewTreeObserver;
 import android.util.Log;
+import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Main extends AppCompatActivity {
-    private RecyclerView recyclerView;
     private EditText searchEditText;
     private Button searchButton;
     private Buttons buttons;
@@ -31,6 +30,8 @@ public class Main extends AppCompatActivity {
     private FirebaseFirestore db;
     private List<Celda> celdas;
     private CeldaAdapter adapter;
+    private RecyclerView recyclerView;
+    private View newRecipe;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +47,12 @@ public class Main extends AppCompatActivity {
         });
 
         loadCeldas();
+        newRecipe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                buttons.CreateRecipe(view);
+            }
+        });
     }
 
     private void initViews() {
@@ -55,6 +62,7 @@ public class Main extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView);
         searchEditText = findViewById(R.id.searchEditText);
         searchButton = findViewById(R.id.searchButton);
+        newRecipe = findViewById(R.id.newRecipeButton);
 
         GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(layoutManager);
@@ -138,6 +146,13 @@ public class Main extends AppCompatActivity {
             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
+        loadCeldas();
+        user.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                buttons.UserButton(view);
+            }
+        });
     }
 
     private void loadCeldas() {
@@ -160,5 +175,4 @@ public class Main extends AppCompatActivity {
         });
 
     }
-
 }
