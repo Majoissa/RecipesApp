@@ -1,4 +1,5 @@
 package com.majoissa.yummee;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,7 +37,10 @@ public class CeldaAdapter extends RecyclerView.Adapter<CeldaAdapter.ViewHolder> 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Buttons.RecipeDetails(view);
+                Intent intent = new Intent(view.getContext(), RecipesDetailsActivity.class);
+                String id = celda.getDocumentId();
+                intent.putExtra("recipeId", celda.getDocumentId()); // Asegúrate de que el modelo Celda tenga un método getId() o algún método para obtener el ID.
+                view.getContext().startActivity(intent);
             }
         });
     }
