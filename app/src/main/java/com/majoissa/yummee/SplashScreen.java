@@ -3,10 +3,12 @@ package com.majoissa.yummee;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class SplashScreen extends AppCompatActivity {
 
@@ -16,15 +18,24 @@ public class SplashScreen extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splashscreen_activity);
-        // Crear una intención para la LoginActivity
-        Intent intent = new Intent(this, LoginActivity.class);
-        //Toast.makeText(this, "Esto funciona", Toast.LENGTH_LONG).show();
-       new Handler().postDelayed(new Runnable() {
+
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        Intent intent;
+
+        if (currentUser != null) {
+            // Si el usuario ya está autenticado, redirige a la actividad principal (Main).
+            intent = new Intent(this, Main.class);
+        } else {
+            // Si el usuario no está autenticado, redirige a LoginActivity.
+            intent = new Intent(this, LoginActivity.class);
+        }
+
+        new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                // Iniciar LoginActivity y mostrar activity_login.xml
+                // Iniciar la actividad correspondiente y finalizar SplashScreen.
                 startActivity(intent);
-                finish(); // Cierra el SplashScreen
+                finish();
             }
         }, SPLASH_DURATION);
     }

@@ -1,6 +1,7 @@
 package com.majoissa.yummee;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,17 +28,17 @@ public class LoginActivity extends AppCompatActivity {
         Button buttonLogin = findViewById(R.id.button);
         TextView textViewCreateAccount = findViewById(R.id.button2);
 
+        loadCredentials(); // Cargar las credenciales al iniciar la actividad
+
         buttonLogin.setOnClickListener(view -> {
             String email = editTextEmail.getText().toString();
             String password = editTextPassword.getText().toString();
 
-            // Llama al método loginUser de FirebaseUtilities
             FirebaseUtilities.loginUser(email, password, new FirebaseUtilities.FirebaseLoginCallback() {
                 @Override
                 public void onSuccess() {
-                    // Inicio de sesión exitoso, redirigir a la actividad principal o realizar otras acciones
+                    saveCredentials(email, password); // Guardar las credenciales después de un inicio de sesión exitoso
                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                    // Ejemplo de redirección a una actividad principal
                     Intent intent = new Intent(LoginActivity.this, Main.class);
                     startActivity(intent);
                     finish();
@@ -45,16 +46,31 @@ public class LoginActivity extends AppCompatActivity {
 
                 @Override
                 public void onError(Exception exception) {
-                    // Error en el inicio de sesión
                     Toast.makeText(LoginActivity.this, "Error en el inicio de sesión", Toast.LENGTH_SHORT).show();
                 }
             });
         });
 
         textViewCreateAccount.setOnClickListener(view -> {
-            // Redirigir a la actividad de registro
             Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
             startActivity(intent);
         });
+    }
+
+    private void saveCredentials(String email, String password) {
+        SharedPreferences sharedPreferences = getSharedPreferences("LoginPrefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("email", email);
+        editor.putString("password", password);
+        editor.apply();
+    }
+
+    private void loadCredentials() {
+        SharedPreferences sharedPreferences = getSharedPreferences("LoginPrefs", MODE_PRIVATE);
+        String savedEmail = sharedPreferences.getString("email", "");
+        String savedPassword = sharedPreferences.getString("password", "");
+
+        editTextEmail.setText(savedEmail);
+        editTextPassword.setText(savedPassword);
     }
 }

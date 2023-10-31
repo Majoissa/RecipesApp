@@ -1,10 +1,12 @@
 package com.majoissa.yummee;
 
 import android.content.Context;
+import android.graphics.Rect;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
+import android.view.ViewTreeObserver;
+import android.util.Log;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,7 +18,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,8 +31,6 @@ public class Main extends AppCompatActivity {
     private FirebaseFirestore db;
     private List<Celda> celdas;
     private CeldaAdapter adapter;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,6 +70,7 @@ public class Main extends AppCompatActivity {
             hideKeyboard();     // Ocultar el teclado después de realizar la búsqueda
         });
 
+
         fetchDataFromFirestore();
     }
 
@@ -99,6 +99,7 @@ public class Main extends AppCompatActivity {
                 Celda celda = document.toObject(Celda.class);
                 celda.setDocumentId(document.getId());
                 celdas.add(celda);
+
             }
             CeldaAdapter adapter = new CeldaAdapter(celdas);
             recyclerView.setAdapter(adapter);
@@ -111,6 +112,7 @@ public class Main extends AppCompatActivity {
     private void fetchDataFromFirestore() {
         db.collection("2023recipesApp")
                 .get()
+
                 .addOnSuccessListener(this::processFirestoreData)
                 .addOnFailureListener(e -> Log.e("Main", "Error al consultar Firestore", e));
 
@@ -156,6 +158,7 @@ public class Main extends AppCompatActivity {
                 recyclerView.setAdapter(adapter);
             }
         });
+
     }
 
 }
