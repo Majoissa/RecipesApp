@@ -1,24 +1,16 @@
 package com.majoissa.yummee;
 
 import android.content.Context;
-//<<<<<<< HEAD
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewTreeObserver;
-//=======
-//import android.os.Bundle;
 import android.util.Log;
-//import android.view.View;
-//>>>>>>> 6c8ed41d62a4d7f590a0d212ee53e3024fab1cce
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-//<<<<<<< HEAD
-//=======
 import android.widget.Toast;
-//>>>>>>> 6c8ed41d62a4d7f590a0d212ee53e3024fab1cce
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -33,23 +25,17 @@ public class Main extends AppCompatActivity {
     private RecyclerView recyclerView;
     private EditText searchEditText;
     private Button searchButton;
-//<<<<<<< HEAD
-//=======
     private Buttons buttons;
     private ImageView user;
     private ImageView favorites;
     private FirebaseFirestore db;
     private List<Celda> celdas;
     private CeldaAdapter adapter;
-//>>>>>>> 6c8ed41d62a4d7f590a0d212ee53e3024fab1cce
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//<<<<<<< HEAD
-//=======
         db = FirebaseFirestore.getInstance();
 
         initViews();
@@ -66,7 +52,6 @@ public class Main extends AppCompatActivity {
         buttons = new Buttons(this);
         user = findViewById(R.id.imageView9);
         favorites = findViewById(R.id.imageView2);
-//>>>>>>> 6c8ed41d62a4d7f590a0d212ee53e3024fab1cce
         recyclerView = findViewById(R.id.recyclerView);
         searchEditText = findViewById(R.id.searchEditText);
         searchButton = findViewById(R.id.searchButton);
@@ -85,15 +70,7 @@ public class Main extends AppCompatActivity {
             hideKeyboard();     // Ocultar el teclado después de realizar la búsqueda
         });
 
-/*<<<<<<< HEAD
-        searchButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String query = searchEditText.getText().toString().trim();
-                if (!query.isEmpty()) {
-                    // Realiza la bÃºsqueda con la cadena 'query'
-                }
-=======*/
+
         fetchDataFromFirestore();
     }
 
@@ -122,7 +99,7 @@ public class Main extends AppCompatActivity {
             for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
                 Celda celda = document.toObject(Celda.class);
                 celdas.add(celda);
-//>>>>>>> 6c8ed41d62a4d7f590a0d212ee53e3024fab1cce
+
             }
             CeldaAdapter adapter = new CeldaAdapter(celdas);
             recyclerView.setAdapter(adapter);
@@ -136,22 +113,7 @@ public class Main extends AppCompatActivity {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("2023recipesApp")
                 .get()
-/*<<<<<<< HEAD
-                .addOnSuccessListener((QuerySnapshot queryDocumentSnapshots) -> {
-                    if (!queryDocumentSnapshots.isEmpty()) {
-                        List<Celda> celdas = new ArrayList<>();
-                        for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
-                            Celda celda = document.toObject(Celda.class);
-                            celdas.add(celda);
-                        }
-                        CeldaAdapter adapter = new CeldaAdapter(celdas);
-                        recyclerView.setAdapter(adapter);
-                    }
-                })
-                .addOnFailureListener(e -> {
-                    // Manejo de errores en caso de fallo en la consulta a Firestore
-                });
-=======*/
+
                 .addOnSuccessListener(this::processFirestoreData)
                 .addOnFailureListener(e -> Log.e("Main", "Error al consultar Firestore", e));
 
@@ -191,6 +153,6 @@ public class Main extends AppCompatActivity {
                 recyclerView.setAdapter(adapter);
             }
         });
-//>>>>>>> 6c8ed41d62a4d7f590a0d212ee53e3024fab1cce
+
     }
 }
