@@ -43,9 +43,19 @@ public class RecipesDetailsActivity extends AppCompatActivity {
     private List<CeldaMessage> celdas;
     private CeldaAdapterMessage adapter;
     private RatingBar stars;
+    private String recipeId;//aqui se almacena el id de cada receta
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        recipeId = getIntent().getStringExtra("recipeId");
+        if (recipeId == null) {
+            Toast.makeText(this, "Recipe ID is missing!", Toast.LENGTH_LONG).show();
+            finish();
+            return;
+        }else {
+            Toast.makeText(this, "no  funciona", Toast.LENGTH_LONG).show();
+        }
+
         setContentView(R.layout.activity_recipes_details);
 
         db = FirebaseFirestore.getInstance();
@@ -98,7 +108,7 @@ public class RecipesDetailsActivity extends AppCompatActivity {
         commentData.put("day", formattedDate);
 
         // Añade el comentario como un documento en una subcolección
-        db.collection("2023recipesApp").document("tartaDeAtun")
+        db.collection("2023recipesApp").document(recipeId)
                 .collection("Comments")  // Crea una subcolección llamada "Comments"
                 .add(commentData)       // Agrega un nuevo comentario
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
@@ -113,7 +123,8 @@ public class RecipesDetailsActivity extends AppCompatActivity {
     }
     private void loadComments() {
         // Accede a la subcolección "Comments" de la receta
-        db.collection("2023recipesApp").document("tartaDeAtun")
+        //String recipeId = getIntent().getStringExtra("recipeId");
+        db.collection("2023recipesApp").document(recipeId)
                 .collection("Comments")
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {

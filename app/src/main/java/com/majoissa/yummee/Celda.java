@@ -1,5 +1,6 @@
 package com.majoissa.yummee;
 public class Celda {
+    private String documentId;
     private String recipe_name;
     private String img_url;
     private double rating_recipes;
@@ -14,7 +15,13 @@ public class Celda {
         this.rating_recipes = rating_recipes;
         this.totalReviews = totalReviews;
     }
+    public String getDocumentId() {
+        return documentId;
+    }
 
+    public void setDocumentId(String documentId) {
+        this.documentId = documentId;
+    }
     public String getRecipe_name() {
         return recipe_name;
     }
