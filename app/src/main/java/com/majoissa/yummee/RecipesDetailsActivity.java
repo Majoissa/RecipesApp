@@ -43,7 +43,7 @@ public class RecipesDetailsActivity extends AppCompatActivity {
     private List<CeldaMessage> celdas;
     private CeldaAdapterMessage adapter;
     private RatingBar stars;
-    private String recipeId;
+    private String recipeId;//aqui se almacena el id de cada receta
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
