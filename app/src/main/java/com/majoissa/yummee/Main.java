@@ -1,6 +1,7 @@
 package com.majoissa.yummee;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -20,7 +21,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Main extends AppCompatActivity {
-
     private RecyclerView recyclerView;
     private EditText searchEditText;
     private Button searchButton;
@@ -144,11 +144,18 @@ public class Main extends AppCompatActivity {
                 celdas = new ArrayList<>();
                 for (QueryDocumentSnapshot document : documentSnapshot) {
                     Celda celda = document.toObject(Celda.class);
+                    celda.setDocumentId(document.getId());
                     celdas.add(celda);
+                    //String id = document.getId();
+                    /*Intent intent = new Intent(Main.this, RecipesDetailsActivity.class);
+                    intent.putExtra("recipeId", id);
+                    startActivity(intent);*/
+                    int kkk=0;
                 }
                 adapter = new CeldaAdapter(celdas);
                 recyclerView.setAdapter(adapter);
             }
         });
     }
+
 }

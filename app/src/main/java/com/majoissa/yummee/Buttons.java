@@ -28,7 +28,4 @@ public class Buttons {
         context.startActivity(i);
     }
 
-    public static void RecipeDetails(View v){
-        context.startActivity(new Intent(context, RecipesDetailsActivity.class));
-    }
 }
