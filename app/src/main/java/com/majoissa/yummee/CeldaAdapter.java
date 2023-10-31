@@ -40,6 +40,12 @@ public class CeldaAdapter extends RecyclerView.Adapter<CeldaAdapter.ViewHolder> 
                 Intent intent = new Intent(view.getContext(), RecipesDetailsActivity.class);
                 String id = celda.getDocumentId();
                 intent.putExtra("recipeId", celda.getDocumentId()); // Asegúrate de que el modelo Celda tenga un método getId() o algún método para obtener el ID.
+                intent.putExtra("recipeName", celda.getRecipe_name());
+                intent.putExtra("recipeImg", celda.getImg_url());
+                intent.putExtra("recipeVideo", celda.getVideo_url());
+                intent.putExtra("recipeDirections", celda.getDirections());
+                intent.putExtra("recipeIngredients", celda.getIngredients());
+                intent.putExtra("ratingRecipe", celda.getRating_recipes());
                 view.getContext().startActivity(intent);
             }
         });

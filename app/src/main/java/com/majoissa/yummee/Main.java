@@ -31,6 +31,7 @@ public class Main extends AppCompatActivity {
     private List<Celda> celdas;
     private CeldaAdapter adapter;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,7 +77,6 @@ public class Main extends AppCompatActivity {
     private void searchInFirestore() {
         String query = searchEditText.getText().toString().trim();
         if (!query.isEmpty()) {
-            FirebaseFirestore db = FirebaseFirestore.getInstance();
             db.collection("2023recipesApp")
                     .orderBy("recipe_name")
                     .startAt(query)
@@ -97,6 +97,7 @@ public class Main extends AppCompatActivity {
             List<Celda> celdas = new ArrayList<>();
             for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
                 Celda celda = document.toObject(Celda.class);
+                celda.setDocumentId(document.getId());
                 celdas.add(celda);
             }
             CeldaAdapter adapter = new CeldaAdapter(celdas);
@@ -108,7 +109,6 @@ public class Main extends AppCompatActivity {
     }
 
     private void fetchDataFromFirestore() {
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("2023recipesApp")
                 .get()
                 .addOnSuccessListener(this::processFirestoreData)

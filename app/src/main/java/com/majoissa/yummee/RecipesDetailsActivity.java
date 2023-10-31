@@ -3,6 +3,8 @@ package com.majoissa.yummee;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.net.Uri;
 import android.os.Bundle;
 
 import java.text.SimpleDateFormat;
@@ -17,8 +19,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RatingBar;
+import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.FirebaseApp;
@@ -30,6 +35,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.ktx.Firebase;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.squareup.picasso.Picasso;
 
 public class RecipesDetailsActivity extends AppCompatActivity {
 
@@ -44,19 +50,25 @@ public class RecipesDetailsActivity extends AppCompatActivity {
     private CeldaAdapterMessage adapter;
     private RatingBar stars;
     private String recipeId;//aqui se almacena el id de cada receta
+    private TextView recipeName;
+    private ImageView recipeImg;
+    private RatingBar recipeRating;
+    private VideoView recipeVideo;
+    private TextView recipeIngredients;
+    private TextView recipeDirections;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_recipes_details);
         recipeId = getIntent().getStringExtra("recipeId");
         if (recipeId == null) {
             Toast.makeText(this, "Recipe ID is missing!", Toast.LENGTH_LONG).show();
             finish();
             return;
-        }else {
-            Toast.makeText(this, "no  funciona", Toast.LENGTH_LONG).show();
         }
 
-        setContentView(R.layout.activity_recipes_details);
+
+        loadRecipeDetails();
 
         db = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
@@ -93,6 +105,35 @@ public class RecipesDetailsActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void loadRecipeDetails() {
+        // Obtiene los datos del Intent
+        String recipeNameString = getIntent().getStringExtra("recipeName");
+        String recipeImgString = getIntent().getStringExtra("recipeImg");
+        String recipeVideoString = getIntent().getStringExtra("recipeVideo");
+        String recipeDirectionsString = getIntent().getStringExtra("recipeDirections");
+        String recipeIngredientsString = getIntent().getStringExtra("recipeIngredients");
+        float ratingRecipeFloat = getIntent().getFloatExtra("ratingRecipe", 0.0f);
+
+        // Inicializa tus Views si aún no lo has hecho
+        recipeName = findViewById(R.id.textView);
+        recipeImg = findViewById(R.id.imageView);
+        recipeVideo = findViewById(R.id.videoView);
+        recipeIngredients = findViewById(R.id.ingredientes);
+        recipeDirections = findViewById(R.id.textView13);
+        recipeRating = findViewById(R.id.ratingRecipes);
+
+        // Asigna los valores a tus Views
+        recipeName.setText(recipeNameString);
+        Picasso.get().load(recipeImgString).into(recipeImg);
+        // Asumiendo que tu VideoView usa un Uri, podrías hacer:
+        recipeVideo.setVideoURI(Uri.parse(recipeVideoString));
+        // TODO: Considera usar alguna librería o método para cargar el video en el VideoView si no es un Uri directo
+        recipeIngredients.setText(recipeIngredientsString);
+        recipeDirections.setText(recipeDirectionsString);
+        recipeRating.setRating(ratingRecipeFloat);
+    }
+
     private void putComment() {
         String userEmail = mAuth.getCurrentUser().getEmail();
         float userRating = stars.getRating();
@@ -142,5 +183,6 @@ public class RecipesDetailsActivity extends AppCompatActivity {
                         adapter.notifyDataSetChanged();
                     }
                 });
+
     }
 }
