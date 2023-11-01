@@ -1,41 +1,44 @@
 package com.majoissa.yummee;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
-
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.MediaController;
+import android.widget.PopupWindow;
 import android.widget.RatingBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.crashlytics.buildtools.reloc.org.apache.http.client.utils.DateUtils;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FieldValue;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.ktx.Firebase;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class RecipesDetailsActivity extends AppCompatActivity {
 
@@ -56,6 +59,10 @@ public class RecipesDetailsActivity extends AppCompatActivity {
     private VideoView recipeVideo;
     private TextView recipeIngredients;
     private TextView recipeDirections;
+    private TextView recipeDuration;
+    private ImageButton toTop;
+    private ScrollView scrollView;
+    private Button nutriButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,6 +85,9 @@ public class RecipesDetailsActivity extends AppCompatActivity {
         home = findViewById(R.id.imageButton16);
         back = findViewById(R.id.imageButton10);
         addComment = findViewById(R.id.editTextText);
+        toTop = findViewById(R.id.imageButton8);
+        scrollView = findViewById(R.id.scrollView2);
+        nutriButton = findViewById(R.id.button3);
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -104,6 +114,19 @@ public class RecipesDetailsActivity extends AppCompatActivity {
                 putComment();
             }
         });
+        toTop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                scrollView.smoothScrollTo(0, 0);
+            }
+        });
+        nutriButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                nutriButton.setEnabled(false);
+                onButtonShowPopup(view);
+            }
+        });
     }
 
     private void loadRecipeDetails() {
@@ -114,6 +137,7 @@ public class RecipesDetailsActivity extends AppCompatActivity {
         String recipeDirectionsString = getIntent().getStringExtra("recipeDirections");
         String recipeIngredientsString = getIntent().getStringExtra("recipeIngredients");
         float ratingRecipeFloat = getIntent().getFloatExtra("ratingRecipe", 0.0f);
+        int recipeTimeInt = getIntent().getIntExtra("recipeDuration", 0);
 
         // Inicializa tus Views si aún no lo has hecho
         recipeName = findViewById(R.id.textView);
@@ -122,16 +146,24 @@ public class RecipesDetailsActivity extends AppCompatActivity {
         recipeIngredients = findViewById(R.id.ingredientes);
         recipeDirections = findViewById(R.id.textView13);
         recipeRating = findViewById(R.id.ratingRecipes);
+        recipeDuration = findViewById(R.id.textView7);
 
         // Asigna los valores a tus Views
         recipeName.setText(recipeNameString);
         Picasso.get().load(recipeImgString).into(recipeImg);
         // Asumiendo que tu VideoView usa un Uri, podrías hacer:
-        recipeVideo.setVideoURI(Uri.parse(recipeVideoString));
+        Uri u = Uri.parse(recipeVideoString);
+        recipeVideo.setVideoURI(u);
+        MediaController mediaController = new MediaController(this);
+        mediaController.setAnchorView(recipeVideo);
+        mediaController.setMediaPlayer(recipeVideo);
+        recipeVideo.setMediaController(mediaController);
+        recipeVideo.start();
         // TODO: Considera usar alguna librería o método para cargar el video en el VideoView si no es un Uri directo
         recipeIngredients.setText(recipeIngredientsString);
         recipeDirections.setText(recipeDirectionsString);
         recipeRating.setRating(ratingRecipeFloat);
+        recipeDuration.setText(recipeTimeInt + " min");
     }
 
     private void putComment() {
@@ -184,5 +216,36 @@ public class RecipesDetailsActivity extends AppCompatActivity {
                     }
                 });
 
+    }
+    public void onButtonShowPopup(View view){
+        LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+        View popupView = inflater.inflate(R.layout.popup_nutritional, null);
+        int width = LinearLayout.LayoutParams.WRAP_CONTENT;
+        int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+        String recipeNut = getIntent().getStringExtra("recipeNutrition");
+        final PopupWindow popupWindow = new PopupWindow(popupView, width, height);
+        Button btn = (Button) popupView.findViewById(R.id.button7);
+        btn.setText("Back");
+        EditText text = (EditText) popupView.findViewById(R.id.editTextTextMultiLine);
+        text.setText(recipeNut);
+        text.requestFocus();
+        text.setClickable(false);
+        popupWindow.setBackgroundDrawable(new ColorDrawable(Color.WHITE));
+        popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+        popupWindow.setOutsideTouchable(false);
+        popupWindow.setFocusable(false);
+        text.setCursorVisible(false);
+        popupWindow.update();
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            popupWindow.setElevation(20);
+        }
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                popupWindow.dismiss();
+                nutriButton.setEnabled(true);
+            }
+        });
     }
 }

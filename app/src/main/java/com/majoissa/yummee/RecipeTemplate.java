@@ -26,6 +26,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
@@ -48,6 +49,7 @@ public class RecipeTemplate extends AppCompatActivity {
     private EditText direc, ingr, time, title;
     private Button uploadButton, nutriButton;
     private String imageUrl, videoUrl;
+    private FirebaseAuth mAuth;
     private static final int BACK = 1000;
     SharedPreferences pref;
     SharedPreferences.Editor editor;
@@ -56,9 +58,13 @@ public class RecipeTemplate extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.createrecipe_activity);
 
+        mAuth = FirebaseAuth.getInstance();
+
         Intent intent = new Intent(this, Main.class);
         pref = getPreferences(MODE_PRIVATE);
         editor = pref.edit();
+        editor.putString("info", "");
+        editor.commit();
         db = FirebaseFirestore.getInstance();
         uploadButton = findViewById(R.id.button4);
         nutriButton = findViewById(R.id.button3);
@@ -185,16 +191,19 @@ public class RecipeTemplate extends AppCompatActivity {
 
     private void uploadRecipe() {
         String nutritionalInfo = pref.getString("info", "");
+        String name = title.getText().toString().trim();
+        String recipeTitle = name.substring(0, 1).toUpperCase() + name.substring(1);
         Map<String, Object> data = new HashMap<>();
         data.put("directions", direc.getText().toString());
         data.put("img_url", imageUrl);
         data.put("ingredients", ingr.getText().toString());
         data.put("rating_recipes", 0.0);
-        data.put("recipe_name", title.getText().toString());
+        data.put("recipe_name", recipeTitle);
         data.put("totalReviews", 0 + " views");
         data.put("video_url", videoUrl);
         data.put("time", Integer.parseInt(time.getText().toString()));
         data.put("nutritional_info", nutritionalInfo);
+        data.put("creator", mAuth.getCurrentUser().getEmail());
 
         db.collection("2023recipesApp").add(data)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
@@ -240,12 +249,5 @@ public class RecipeTemplate extends AppCompatActivity {
                 popupWindow.dismiss();
             }
         });
-    }
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        editor = pref.edit();
-        editor.putString("info", "");
-        editor.commit();
     }
 }

@@ -43,12 +43,12 @@
 
                     <ImageButton
                         android:id="@+id/imageButton10"
-                        android:layout_width="69dp"
-                        android:layout_height="50dp"
+                        android:layout_width="65dp"
+                        android:layout_height="match_parent"
                         android:background="@null"
                         android:clickable="true"
-                        android:scaleType="fitCenter"
-                        app:srcCompat="@drawable/_4517" />
+                        android:scaleType="centerCrop"
+                        app:srcCompat="@drawable/flecha" />
 
                     <TextView
                         android:id="@+id/textView"
@@ -89,6 +89,7 @@
                     android:textAlignment="center"
                     android:textColor="#000000"
                     android:textSize="24sp"
+                    android:gravity="center"
                     app:layout_constraintBottom_toBottomOf="@+id/imageView"
                     app:layout_constraintStart_toStartOf="parent" />
 
@@ -182,7 +183,6 @@
                     android:id="@+id/textView16"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
                     android:fontFamily="@font/amaranth_bold"
                     android:padding="20dp"
                     android:paddingTop="15dp"
@@ -191,7 +191,7 @@
                     android:textSize="20dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView13" />
+                    app:layout_constraintTop_toBottomOf="@+id/button3" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerView"
@@ -237,13 +237,13 @@
                     android:id="@+id/button4"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="48dp"
                     android:layout_marginBottom="33dp"
                     android:backgroundTint="#FEB06A"
                     android:gravity="center"
                     android:padding="8dp"
                     android:text="Add comment"
                     app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/editTextText" />
 
@@ -251,29 +251,28 @@
                     android:id="@+id/button3"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="48dp"
-                    android:layout_marginBottom="33dp"
                     android:backgroundTint="#FEB06A"
                     android:padding="8dp"
                     android:text="Nutritional info"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/editTextText" />
-
-                <ImageButton
-                    android:id="@+id/sharebutton"
-                    android:layout_width="211dp"
-                    android:layout_height="50dp"
-                    android:background="@null"
-                    android:src="?attr/actionModeShareDrawable"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/imageView"
-                    tools:foregroundGravity="center" />
+                    app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>
     </ScrollView>
+
+    <ImageButton
+        android:id="@+id/imageButton8"
+        android:layout_width="59dp"
+        android:layout_height="40dp"
+        android:background="#00000000"
+        android:rotation="90"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/flecha" />
 
     <LinearLayout
         android:id="@+id/linearLayout5"

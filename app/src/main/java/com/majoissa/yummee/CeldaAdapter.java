@@ -46,6 +46,8 @@ public class CeldaAdapter extends RecyclerView.Adapter<CeldaAdapter.ViewHolder> 
                 intent.putExtra("recipeDirections", celda.getDirections());
                 intent.putExtra("recipeIngredients", celda.getIngredients());
                 intent.putExtra("ratingRecipe", celda.getRating_recipes());
+                intent.putExtra("recipeDuration", celda.getTime());
+                intent.putExtra("recipeNutrition", celda.getNutritional_info());
                 view.getContext().startActivity(intent);
             }
         });
