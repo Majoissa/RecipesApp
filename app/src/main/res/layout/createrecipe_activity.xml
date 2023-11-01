@@ -41,11 +41,12 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
-                <ImageView
+                <ImageButton
                     android:id="@+id/imageView10"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="223dp"
                     android:layout_marginBottom="32dp"
+                    android:adjustViewBounds="true"
                     android:clickable="true"
                     android:contentDescription="Template to add recipe photo"
                     android:foreground="@android:drawable/ic_menu_add"
@@ -169,31 +170,6 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/editTextTextMultiLine3" />
-
-                <Button
-                    android:id="@+id/accept_image"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="172dp"
-                    android:text="Done"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.778"
-                    app:layout_constraintStart_toEndOf="@+id/editTextTime4"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <Button
-                    android:id="@+id/add_image"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="#FF5722"
-                    android:backgroundTint="#D3C5C5"
-                    android:text="Add image"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    tools:ignore="MissingConstraints"
-                    tools:layout_editor_absoluteY="0dp" />
-
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>
@@ -212,7 +188,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
+        <ImageButton
             android:id="@+id/imageView9"
             android:layout_width="69dp"
             android:layout_height="50dp"
