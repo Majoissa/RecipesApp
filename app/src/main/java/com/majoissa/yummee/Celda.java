@@ -8,7 +8,8 @@ public class Celda {
     private String directions;
     private String ingredients;
     private String video_url;
-
+    private String nutritional_info;
+    private int time;
     public Celda() {
         // Constructor sin argumentos necesario para Firestore
     }
@@ -29,9 +30,7 @@ public class Celda {
     public void setDocumentId(String documentId) {
         this.documentId = documentId;
     }
-    public String getRecipe_name() {
-        return recipe_name;
-    }
+    public String getRecipe_name() { return recipe_name; }
     public String getImg_url() {
         return img_url;
     }
@@ -50,4 +49,6 @@ public class Celda {
     public String getTotalReviews() {
         return totalReviews;
     }
+    public int getTime() { return time; }
+    public String getNutritional_info() { return nutritional_info; }
 }

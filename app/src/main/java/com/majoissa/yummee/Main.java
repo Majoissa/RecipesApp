@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -32,6 +33,7 @@ public class Main extends AppCompatActivity {
     private CeldaAdapter adapter;
     private RecyclerView recyclerView;
     private View newRecipe;
+    private ImageButton back;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +55,14 @@ public class Main extends AppCompatActivity {
                 buttons.CreateRecipe(view);
             }
         });
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                loadCeldas();
+                hideSearch();
+                searchEditText.setText("");
+            }
+        });
     }
 
     private void initViews() {
@@ -63,6 +73,7 @@ public class Main extends AppCompatActivity {
         searchEditText = findViewById(R.id.searchEditText);
         searchButton = findViewById(R.id.searchButton);
         newRecipe = findViewById(R.id.newRecipeButton);
+        back = findViewById(R.id.imageButton7);
 
         GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(layoutManager);
@@ -83,7 +94,8 @@ public class Main extends AppCompatActivity {
     }
 
     private void searchInFirestore() {
-        String query = searchEditText.getText().toString().trim();
+        String text = searchEditText.getText().toString().trim();
+        String query = text.substring(0, 1).toUpperCase() + text.substring(1);
         if (!query.isEmpty()) {
             db.collection("2023recipesApp")
                     .orderBy("recipe_name")

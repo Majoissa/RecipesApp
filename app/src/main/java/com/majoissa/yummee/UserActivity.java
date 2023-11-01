@@ -1,8 +1,5 @@
 package com.majoissa.yummee;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
@@ -12,13 +9,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserActivity extends AppCompatActivity {
 
@@ -28,13 +32,21 @@ public class UserActivity extends AppCompatActivity {
     private ImageButton back;
     private TextView userName;
     private FirebaseAuth mAuth;
+    private FirebaseFirestore db;
+    private List<Celda> celdas;
+    private CeldaAdapter adapter;
+    private RecyclerView recyclerView;
+    private TextView emptyRecipes;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
 
         mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
 
+        recyclerView = findViewById(R.id.userRecipes);
+        emptyRecipes = findViewById(R.id.textView14);
         userName = findViewById(R.id.textView5);
         logout = findViewById(R.id.imageButton2);
         home = findViewById(R.id.imageButton4);
@@ -64,6 +76,7 @@ public class UserActivity extends AppCompatActivity {
                 onButtonShowPopup(view);
             }
         });
+        loadCeldas();
     }
 
     public void onButtonShowPopup(View view){
@@ -97,6 +110,32 @@ public class UserActivity extends AppCompatActivity {
             public void onClick(View view) {
                 popupWindow.dismiss();
                 logout.setEnabled(true);
+            }
+        });
+    }
+    private void loadCeldas() {
+        GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
+        recyclerView.setLayoutManager(layoutManager);
+
+        int spacingInPixels = getResources().getDimensionPixelSize(R.dimen.grid_spacing);
+        recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, spacingInPixels, true, 0));
+        
+        db.collection("2023recipesApp")
+                .whereEqualTo("creator", mAuth.getCurrentUser().getEmail())
+                .addSnapshotListener((documentSnapshot, error) -> {
+            if (documentSnapshot != null && !documentSnapshot.getDocuments().isEmpty()) {
+                celdas = new ArrayList<>();
+                for (QueryDocumentSnapshot document : documentSnapshot) {
+                    Celda celda = document.toObject(Celda.class);
+                    celda.setDocumentId(document.getId());
+                    celdas.add(celda);
+                }
+                adapter = new CeldaAdapter(celdas);
+                recyclerView.setAdapter(adapter);
+            }
+            else {
+                recyclerView.setAdapter(null);
+                emptyRecipes.setVisibility(View.VISIBLE);
             }
         });
     }
