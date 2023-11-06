@@ -199,7 +199,7 @@ public class RecipeTemplate extends AppCompatActivity {
         data.put("ingredients", ingr.getText().toString());
         data.put("rating_recipes", 0.0);
         data.put("recipe_name", recipeTitle);
-        data.put("totalReviews", 0 + " views");
+        data.put("",0);
         data.put("video_url", videoUrl);
         data.put("time", Integer.parseInt(time.getText().toString()));
         data.put("nutritional_info", nutritionalInfo);
