@@ -75,11 +75,11 @@ public class Main extends AppCompatActivity {
         newRecipe = findViewById(R.id.newRecipeButton);
         back = findViewById(R.id.imageButton7);
 
-        GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
+        GridLayoutManager layoutManager = new GridLayoutManager(this, 3);
         recyclerView.setLayoutManager(layoutManager);
 
-        int spacingInPixels = getResources().getDimensionPixelSize(R.dimen.grid_spacing);
-        recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, spacingInPixels, true, 0));
+        int spacingInPixels = 75;
+        recyclerView.addItemDecoration(new GridSpacingItemDecoration(3, spacingInPixels, true, 0));
 
         ImageView imageView4 = findViewById(R.id.imageView4);
         imageView4.setOnClickListener(v -> displaySearch());
@@ -109,7 +109,7 @@ public class Main extends AppCompatActivity {
                     });
         } else {
             fetchDataFromFirestore();
-        }
+        } //aloha
     }
 
     private void processFirestoreData(QuerySnapshot queryDocumentSnapshots) {
