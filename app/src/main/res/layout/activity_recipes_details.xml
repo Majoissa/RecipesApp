@@ -258,6 +258,18 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
+                <ImageButton
+                    android:id="@+id/imageButton9"
+                    android:layout_width="82dp"
+                    android:layout_height="71dp"
+                    android:adjustViewBounds="true"
+                    android:background="#00FFFFFF"
+                    android:scaleType="centerCrop"
+                    android:tint="#837979"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/imageView"
+                    app:srcCompat="@drawable/logo_favoritos" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>

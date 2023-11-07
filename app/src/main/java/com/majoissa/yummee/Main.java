@@ -60,9 +60,11 @@ public class Main extends AppCompatActivity {
             public void onClick(View view) {
                 loadCeldas();
                 hideSearch();
+                hideKeyboard();
                 searchEditText.setText("");
             }
         });
+
     }
 
     private void initViews() {
@@ -89,14 +91,19 @@ public class Main extends AppCompatActivity {
             hideKeyboard();     // Ocultar el teclado después de realizar la búsqueda
         });
 
-
+        favorites.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                buttons.FavoriteButton(view);
+            }
+        });
         fetchDataFromFirestore();
     }
 
     private void searchInFirestore() {
         String text = searchEditText.getText().toString().trim();
-        String query = text.substring(0, 1).toUpperCase() + text.substring(1);
-        if (!query.isEmpty()) {
+        if (!text.isEmpty()) {
+            String query = text.substring(0, 1).toUpperCase() + text.substring(1);
             db.collection("2023recipesApp")
                     .orderBy("recipe_name")
                     .startAt(query)
@@ -109,7 +116,7 @@ public class Main extends AppCompatActivity {
                     });
         } else {
             fetchDataFromFirestore();
-        } //aloha
+        }
     }
 
     private void processFirestoreData(QuerySnapshot queryDocumentSnapshots) {
