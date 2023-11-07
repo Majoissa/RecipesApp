@@ -1,5 +1,6 @@
 package com.majoissa.yummee;
 
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
@@ -27,6 +28,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -46,6 +48,7 @@ public class RecipesDetailsActivity extends AppCompatActivity {
     private Button post;
     private ImageButton home;
     private ImageButton back;
+    private ImageButton goToLikes;
     private EditText addComment;
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
@@ -63,6 +66,10 @@ public class RecipesDetailsActivity extends AppCompatActivity {
     private ImageButton toTop;
     private ScrollView scrollView;
     private Button nutriButton;
+    private ImageButton favButton;
+    private boolean favorited = false;
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,7 +80,6 @@ public class RecipesDetailsActivity extends AppCompatActivity {
             finish();
             return;
         }
-
 
         loadRecipeDetails();
 
@@ -88,6 +94,8 @@ public class RecipesDetailsActivity extends AppCompatActivity {
         toTop = findViewById(R.id.imageButton8);
         scrollView = findViewById(R.id.scrollView2);
         nutriButton = findViewById(R.id.button3);
+        favButton = findViewById(R.id.imageButton9);
+        goToLikes = findViewById(R.id.imageButton12);
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -127,6 +135,19 @@ public class RecipesDetailsActivity extends AppCompatActivity {
                 onButtonShowPopup(view);
             }
         });
+        favButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                likeDislike();
+            }
+        });
+        goToLikes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                buttons.FavoriteButton(view);
+            }
+        });
+        checkIfLiked();
     }
 
     private void loadRecipeDetails() {
@@ -248,4 +269,53 @@ public class RecipesDetailsActivity extends AppCompatActivity {
             }
         });
     }
+    private void likeDislike() {
+        Map<String, Object> addLike = new HashMap<>();
+        addLike.put("likedBy", mAuth.getCurrentUser().getEmail());
+        CollectionReference likesCollection = db.collection("2023recipesApp").document(recipeId).collection("Likes");
+
+        sharedPreferences = getPreferences(MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+        if (favorited) {
+            favButton.setColorFilter(Color.argb(255, 131, 121, 121));
+            favorited = false;
+            editor.putBoolean("liked_" + recipeId, false);
+            editor.apply();
+            likesCollection.whereEqualTo("likedBy", mAuth.getCurrentUser().getEmail()).get().addOnSuccessListener(queryDocumentSnapshots -> {
+                Toast.makeText(this, "Removed like!", Toast.LENGTH_SHORT).show();
+                for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+                    // Obtiene la referencia del documento y lo borra.
+                    DocumentReference docRef = document.getReference();
+                    docRef.delete();
+                }
+            });
+        }
+        else {
+            favButton.setColorFilter(Color.argb(255, 121, 155, 126));
+            favorited = true;
+            editor.putBoolean("liked_" + recipeId, true);
+            editor.apply();
+            // Agrega un nuevo documento a la colección "Likes".
+            likesCollection.add(addLike).addOnSuccessListener(documentReference -> {
+                Toast.makeText(RecipesDetailsActivity.this, "Liked!", Toast.LENGTH_SHORT).show();
+            });
+        }
+    }
+    private void checkIfLiked() {
+        SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
+
+        // Obtén el valor de "liked_recipeId" (reemplaza recipeId por el ID real de la receta).
+        boolean liked = sharedPreferences.getBoolean("liked_" + recipeId, false);
+
+        if (liked) {
+            // El usuario ya dio "like" a esta receta.
+            favButton.setColorFilter(Color.argb(255, 121, 155, 126));
+            favorited = true;
+        } else {
+            // El usuario no ha dado "like" a esta receta.
+            favButton.setColorFilter(Color.argb(255, 131, 121, 121));
+            favorited = false;
+        }
+    }
+
 }

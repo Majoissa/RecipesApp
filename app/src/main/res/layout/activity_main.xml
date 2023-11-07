@@ -10,8 +10,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
-        android:layout_width="399dp"
-        android:layout_height="498dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.538"
@@ -20,7 +20,7 @@
 
     <View
         android:id="@+id/view"
-        android:layout_width="414dp"
+        android:layout_width="0dp"
         android:layout_height="66dp"
         android:background="#FFD8A9"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -86,14 +86,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
-        android:layout_marginBottom="1dp"
         android:text="Buscar"
         android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/view"
+        app:layout_constraintBottom_toBottomOf="@+id/searchEditText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/searchEditText"
-        app:layout_constraintTop_toBottomOf="@+id/textView8"
-        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintTop_toTopOf="@+id/searchEditText"
         tools:visibility="invisible" />
 
     <EditText
@@ -104,12 +102,10 @@
         android:layout_marginBottom="7dp"
         android:hint="Buscar..."
         android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/imageView2"
+        app:layout_constraintBottom_toTopOf="@+id/view"
         app:layout_constraintEnd_toStartOf="@+id/searchButton"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView8"
-        app:layout_constraintVertical_bias="1.0"
         tools:visibility="invisible" />
 
     <TextView
@@ -170,8 +166,8 @@
 
     <ImageButton
         android:id="@+id/imageButton7"
-        android:layout_width="58dp"
-        android:layout_height="57dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:adjustViewBounds="false"
         android:background="#00FFFFFF"
         android:cropToPadding="false"
