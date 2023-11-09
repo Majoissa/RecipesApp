@@ -31,4 +31,7 @@ public class Buttons {
     public void CreateRecipe(View v){
         context.startActivity(new Intent(context, RecipeTemplate.class));
     }
+    public void FavoriteButton(View v){
+        context.startActivity(new Intent(context, FavoritesActivity.class));
+    }
 }
