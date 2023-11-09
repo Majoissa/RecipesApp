@@ -8,6 +8,10 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.squareup.picasso.Picasso;
 import java.util.List;
 
@@ -15,9 +19,11 @@ public class CeldaAdapter extends RecyclerView.Adapter<CeldaAdapter.ViewHolder> 
 
     //aloha
     private final List<Celda> celdas;
+    private final FirebaseFirestore db;
 
     public CeldaAdapter(List<Celda> celdas) {
         this.celdas = celdas;
+        this.db = FirebaseFirestore.getInstance(); // Inicialización de la instancia de FirebaseFirestore
     }
 
     @NonNull
@@ -34,6 +40,22 @@ public class CeldaAdapter extends RecyclerView.Adapter<CeldaAdapter.ViewHolder> 
         holder.titul.setText(celda.getRecipe_name());
         holder.valoracio.setRating((float) celda.getRating_recipes());
         holder.totalreviews.setText(celda.getTotalReviews());
+
+        db.collection("2023recipesApp").document(celda.getDocumentId())
+                .collection("Ratings").get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    double totalRating = 0;
+                    int count = queryDocumentSnapshots.size();
+
+                    for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+                        totalRating += document.getDouble("rating");
+                    }
+
+                    if (count > 0) {
+                        double average = totalRating / count;
+                        holder.valoracio.setRating((float) average);
+                    }
+                });
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
