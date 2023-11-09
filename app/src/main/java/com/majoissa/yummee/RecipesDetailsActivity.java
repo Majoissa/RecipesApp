@@ -99,6 +99,14 @@ public class RecipesDetailsActivity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        stars.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                if (fromUser) { // Confirma que el cambio fue hecho por el usuario y no programáticamente
+                    storeRating(); // Llama a la función que guarda la valoración
+                }
+            }
+        });
         celdas = new ArrayList<>();
         loadComments();
 
@@ -317,5 +325,58 @@ public class RecipesDetailsActivity extends AppCompatActivity {
             favorited = false;
         }
     }
+
+    private void storeRating() {
+        // Revisa si ya se ha valorado antes para evitar valoraciones múltiples
+        sharedPreferences = getPreferences(MODE_PRIVATE);
+        boolean hasRated = sharedPreferences.getBoolean("hasRated_" + recipeId, false);
+
+        if (!hasRated) {
+            float userRating = stars.getRating();
+
+            Map<String, Object> ratingData = new HashMap<>();
+            ratingData.put("rating", userRating);
+            ratingData.put("userEmail", mAuth.getCurrentUser().getEmail()); // Asociar la valoración con el usuario
+
+            // Guarda la valoración en una subcolección del documento de la receta
+            db.collection("2023recipesApp").document(recipeId)
+                    .collection("Ratings")
+                    .add(ratingData)
+                    .addOnSuccessListener(documentReference -> {
+                        Toast.makeText(RecipesDetailsActivity.this, "Rating stored!", Toast.LENGTH_SHORT).show();
+                        sharedPreferences.edit().putBoolean("hasRated_" + recipeId, true).apply();
+                        updateRatingAverage(userRating); // Calcula y actualiza el promedio
+                    });
+        } else {
+            Toast.makeText(this, "You have already rated this recipe.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void updateRatingAverage(float newRating) {
+        CollectionReference ratingsCollection = db.collection("2023recipesApp").document(recipeId).collection("Ratings");
+
+        ratingsCollection.get().addOnSuccessListener(queryDocumentSnapshots -> {
+            double totalRating = 0;
+            int count = 0;
+
+            for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+                totalRating += document.getDouble("rating");
+                count++;
+            }
+
+            if (count > 0) {
+                double average = totalRating / count;
+                // Actualiza el promedio en el documento de la receta
+                db.collection("2023recipesApp").document(recipeId)
+                        .update("rating_recipes", average);
+                // También puedes actualizar el número de reseñas si es necesario
+                // db.collection("2023recipesApp").document(recipeId)
+                //         .update("totalReviews", count);
+
+                recipeRating.setRating((float) average); // Actualiza la UI con el promedio
+            }
+        });
+    }
+
 
 }
