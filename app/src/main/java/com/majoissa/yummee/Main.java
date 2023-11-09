@@ -2,6 +2,7 @@ package com.majoissa.yummee;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -80,7 +81,7 @@ public class Main extends AppCompatActivity {
         GridLayoutManager layoutManager = new GridLayoutManager(this, 3);
         recyclerView.setLayoutManager(layoutManager);
 
-        int spacingInPixels = 75;
+        int spacingInPixels = convertDpToPixel(8, this);
         recyclerView.addItemDecoration(new GridSpacingItemDecoration(3, spacingInPixels, true, 0));
 
         ImageView imageView4 = findViewById(R.id.imageView4);
@@ -98,6 +99,10 @@ public class Main extends AppCompatActivity {
             }
         });
         fetchDataFromFirestore();
+    }
+
+    public static int convertDpToPixel(int dp, Context context) {
+        return (int) (dp * ((float) context.getResources().getDisplayMetrics().densityDpi / DisplayMetrics.DENSITY_DEFAULT));
     }
 
     private void searchInFirestore() {
