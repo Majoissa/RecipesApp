@@ -10,8 +10,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="399dp"
+        android:layout_height="498dp"
         app:layout_constraintBottom_toTopOf="@+id/view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.538"
@@ -20,78 +20,83 @@
 
     <View
         android:id="@+id/view"
-        android:layout_width="0dp"
-        android:layout_height="66dp"
-        android:background="#FFD8A9"
+        android:layout_width="411dp"
+        android:layout_height="68dp"
+        android:background="#F4EFEF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.666"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <View
         android:id="@+id/view2"
         android:layout_width="wrap_content"
         android:layout_height="66dp"
-        android:background="#FFD8A9"
+        android:background="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/imageView5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.428"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <ImageView
         android:id="@+id/imageView9"
-        android:layout_width="120dp"
-        android:layout_height="51dp"
+        android:layout_width="106dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="1dp"
         android:clickable="true"
         android:onClick="ViewProfile"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.992"
+        app:layout_constraintTop_toTopOf="@+id/view"
+        app:layout_constraintVertical_bias="0.25"
         app:srcCompat="@drawable/logo_perfil" />
 
     <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="127dp"
-        android:layout_height="71dp"
-        android:clickable="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.943"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/logo_favoritos" />
-
-    <ImageView
         android:id="@+id/imageView4"
-        android:layout_width="121dp"
-        android:layout_height="51dp"
+        android:layout_width="107dp"
+        android:layout_height="41dp"
         android:clickable="true"
         android:focusable="true"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/textView22"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.055"
+        app:layout_constraintHorizontal_bias="0.052"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.992"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerView"
+        app:layout_constraintVertical_bias="0.916"
         app:srcCompat="@drawable/logo_lupa" />
 
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="145dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="8dp"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.973"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerView"
+        app:layout_constraintVertical_bias="0.777"
+        app:srcCompat="@drawable/logo_favoritos" />
 
     <Button
         android:id="@+id/searchButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
+        android:layout_marginBottom="5dp"
         android:text="Buscar"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/searchEditText"
+        app:layout_constraintBottom_toTopOf="@+id/view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/searchEditText"
-        app:layout_constraintTop_toTopOf="@+id/searchEditText"
+        app:layout_constraintTop_toBottomOf="@+id/newRecipeButton"
+        app:layout_constraintVertical_bias="0.991"
         tools:visibility="invisible" />
 
     <EditText
@@ -99,13 +104,15 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginBottom="7dp"
+        android:layout_marginBottom="5dp"
         android:hint="Buscar..."
         android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/view"
+        app:layout_constraintBottom_toBottomOf="@+id/recyclerView"
         app:layout_constraintEnd_toStartOf="@+id/searchButton"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/newRecipeButton"
+        app:layout_constraintVertical_bias="0.993"
         tools:visibility="invisible" />
 
     <TextView
@@ -140,7 +147,7 @@
         app:layout_constraintBottom_toTopOf="@+id/recyclerView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView17"
-        app:layout_constraintTop_toBottomOf="@+id/view5">
+        app:layout_constraintTop_toBottomOf="@+id/imageView5">
 
         <ImageView
             android:id="@+id/imageView"
@@ -166,8 +173,8 @@
 
     <ImageButton
         android:id="@+id/imageButton7"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="58dp"
+        android:layout_height="57dp"
         android:adjustViewBounds="false"
         android:background="#00FFFFFF"
         android:cropToPadding="false"
@@ -180,28 +187,105 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/flecha" />
 
-    <View
-        android:id="@+id/view5"
-        android:layout_width="wrap_content"
-        android:layout_height="192dp"
-        android:background="@drawable/capcaleraxd"
-        app:layout_constraintBottom_toTopOf="@+id/newRecipeButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view2" />
-
     <TextView
         android:id="@+id/textView17"
-        android:layout_width="80dp"
-        android:layout_height="38dp"
+        android:layout_width="82dp"
+        android:layout_height="33dp"
         android:layout_marginStart="12dp"
         android:text="Recipes!"
         android:textColor="#000000"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/recyclerView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view5"
-        app:layout_constraintVertical_bias="0.529" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView5" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="411dp"
+        android:layout_height="192dp"
+        android:adjustViewBounds="true"
+        android:background="@drawable/imagedrawable"
+        android:outlineProvider="bounds"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toTopOf="@+id/newRecipeButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view2"
+        app:srcCompat="@drawable/capcaleraxd" />
+
+    <TextView
+        android:id="@+id/textView19"
+        android:layout_width="23dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="3dp"
+        android:layout_marginEnd="3dp"
+        android:text="|"
+        android:textAlignment="center"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/imageView9"
+        app:layout_constraintStart_toEndOf="@+id/imageView4"
+        app:layout_constraintTop_toTopOf="@+id/view" />
+
+    <TextView
+        android:id="@+id/textView23"
+        android:layout_width="23dp"
+        android:layout_height="53dp"
+        android:text="|"
+        android:textAlignment="center"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.667"
+        app:layout_constraintStart_toStartOf="@+id/view"
+        app:layout_constraintTop_toTopOf="@+id/view"
+        app:layout_constraintVertical_bias="0.533" />
+
+    <TextView
+        android:id="@+id/textView22"
+        android:layout_width="71dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="50dp"
+        android:text="Search"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.111"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/view" />
+
+    <TextView
+        android:id="@+id/textView20"
+        android:layout_width="71dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="50dp"
+        android:text="Profile"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/view" />
+
+    <TextView
+        android:id="@+id/textView21"
+        android:layout_width="71dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="50dp"
+        android:text="Favorites"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.867"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/view" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
