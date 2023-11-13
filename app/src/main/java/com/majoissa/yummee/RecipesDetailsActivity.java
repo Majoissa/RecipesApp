@@ -3,7 +3,6 @@ package com.majoissa.yummee;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -14,14 +13,13 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.MediaController;
 import android.widget.PopupWindow;
 import android.widget.RatingBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.VideoView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -33,6 +31,9 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
 import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
@@ -41,6 +42,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class RecipesDetailsActivity extends AppCompatActivity {
 
@@ -59,7 +62,7 @@ public class RecipesDetailsActivity extends AppCompatActivity {
     private TextView recipeName;
     private ImageView recipeImg;
     private RatingBar recipeRating;
-    private VideoView recipeVideo;
+    private YouTubePlayerView recipeVideo;
     private TextView recipeIngredients;
     private TextView recipeDirections;
     private TextView recipeDuration;
@@ -177,18 +180,20 @@ public class RecipesDetailsActivity extends AppCompatActivity {
         recipeRating = findViewById(R.id.ratingRecipes);
         recipeDuration = findViewById(R.id.textView7);
 
+        getLifecycle().addObserver(recipeVideo);
+
         // Asigna los valores a tus Views
         recipeName.setText(recipeNameString);
         Picasso.get().load(recipeImgString).into(recipeImg);
-        // Asumiendo que tu VideoView usa un Uri, podrías hacer:
-        Uri u = Uri.parse(recipeVideoString);
-        recipeVideo.setVideoURI(u);
-        MediaController mediaController = new MediaController(this);
-        mediaController.setAnchorView(recipeVideo);
-        mediaController.setMediaPlayer(recipeVideo);
-        recipeVideo.setMediaController(mediaController);
-        recipeVideo.start();
-        // TODO: Considera usar alguna librería o método para cargar el video en el VideoView si no es un Uri directo
+        recipeVideo.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
+            @Override
+            public void onReady(@NonNull YouTubePlayer youTubePlayer) {
+                super.onReady(youTubePlayer);
+                String videoId = getYoutubeId(recipeVideoString);
+                youTubePlayer.cueVideo(videoId, 0f);
+            }
+        });
+
         recipeIngredients.setText(recipeIngredientsString);
         recipeDirections.setText(recipeDirectionsString);
         recipeRating.setRating(ratingRecipeFloat);
@@ -377,6 +382,15 @@ public class RecipesDetailsActivity extends AppCompatActivity {
             }
         });
     }
+    private static String getYoutubeId(String url) {
+        String pattern = "^(?:https?:\\/\\/)?(?:(?:www\\.)?youtube\\.com\\/(?:(?:v\\/)|(?:embed\\/|watch(?:\\/|\\?)){1,2}(?:.*v=)?|.*v=)?|(?:www\\.)?youtu\\.be\\/)([A-Za-z0-9_\\-]+)&?.*$";
 
-
+        Pattern compiledPattern = Pattern.compile(pattern,
+                Pattern.CASE_INSENSITIVE);
+        Matcher matcher = compiledPattern.matcher(url);
+        if (matcher.find()) {
+            return matcher.group(1);
+        }
+        return null;
+    }
 }
