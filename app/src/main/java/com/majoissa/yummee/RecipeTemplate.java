@@ -19,7 +19,6 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.Toast;
-import android.widget.VideoView;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -43,8 +42,6 @@ public class RecipeTemplate extends AppCompatActivity {
     private ImageButton back;
     private ImageButton addImageButton;
     private ActivityResultLauncher<String> mGetContent;
-    //private ActivityResultLauncher<String> mGetContent2;
-    private VideoView video;
     private FirebaseFirestore db;
     private EditText direc, ingr, time, title, videoUrl;
     private Button uploadButton, nutriButton;
@@ -85,15 +82,41 @@ public class RecipeTemplate extends AppCompatActivity {
         uploadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                uploadFile();
-                Toast.makeText(RecipeTemplate.this, "Uploading recipe...", Toast.LENGTH_SHORT).show();
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        startActivity(intent);
-                        finish();
+                if (fileUri == null) {
+                    Toast.makeText(RecipeTemplate.this, "Please select an image.", Toast.LENGTH_SHORT).show();
+                }
+                else if (videoUrl.getText().toString().trim().isEmpty()) {
+                    Toast.makeText(RecipeTemplate.this, "Please provide a YouTube link.", Toast.LENGTH_SHORT).show();
+                }
+                else if (ingr.getText().toString().trim().isEmpty()) {
+                    Toast.makeText(RecipeTemplate.this, "You should write the ingredients!", Toast.LENGTH_SHORT).show();
+                }
+                else if (direc.getText().toString().trim().isEmpty()) {
+                    Toast.makeText(RecipeTemplate.this, "Don't forget to write the directions!", Toast.LENGTH_SHORT).show();
+                }
+                else if (title.getText().toString().trim().isEmpty() || title.getText().toString().equals("Recipe Title")) {
+                    Toast.makeText(RecipeTemplate.this, "Please write the name of your recipe.", Toast.LENGTH_SHORT).show();
+                }
+                else if (time.getText().toString().isEmpty() || !time.getText().toString().matches("\\d+")) {
+                    Toast.makeText(RecipeTemplate.this, "Please provide numbers to the time field.", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    String youtubePattern = "^(?:https?:\\/\\/)?(?:(?:www\\.)?youtube\\.com\\/(?:(?:v\\/)|(?:embed\\/|watch(?:\\/|\\?)){1,2}(?:.*v=)?|.*v=)?|(?:www\\.)?youtu\\.be\\/)([A-Za-z0-9_\\-]+)&?.*$";
+                    if (videoUrl.getText().toString().trim().matches(youtubePattern)) {
+                        uploadFile();
+                        Toast.makeText(RecipeTemplate.this, "Uploading recipe...", Toast.LENGTH_SHORT).show();
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                startActivity(intent);
+                                finish();
+                            }
+                        }, BACK);
                     }
-                }, BACK);
+                    else {
+                        Toast.makeText(RecipeTemplate.this, "Please provide a valid YouTube link.", Toast.LENGTH_SHORT).show();
+                    }
+                }
             }
         });
         mGetContent = registerForActivityResult(new ActivityResultContracts.GetContent(),
@@ -105,20 +128,8 @@ public class RecipeTemplate extends AppCompatActivity {
                         addImageButton.setImageURI(imageUri);
                     }
                 });
-
-        /*mGetContent2 = registerForActivityResult(new ActivityResultContracts.GetContent(),
-                videoUri -> {
-                    if (videoUri != null) {
-                        fileUri2 = videoUri;
-                        video.setVideoURI(videoUri);
-                        video.setForeground(null);
-                        video.seekTo(1);
-                    }
-                });*/
-
         addImageButton = findViewById(R.id.imageView10);
         addImageButton.setOnClickListener(v -> openImageFileChooser());
-        //video.setOnClickListener(x -> openVideoFileChooser());
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -130,15 +141,8 @@ public class RecipeTemplate extends AppCompatActivity {
     private void openImageFileChooser() {
         mGetContent.launch("image/*");
     }
-
-    /*private void openVideoFileChooser() {
-        mGetContent2.launch("video/*");
-    }*/
-
     private void uploadFile() {
         final boolean[] isImageUploaded = {false};
-        //final boolean[] isVideoUploaded = {false};
-
         if (fileUri != null) {
             StorageReference riversRef = mStorageRef.child("ImagesRecipes/" + fileUri.getLastPathSegment());
 
@@ -163,30 +167,6 @@ public class RecipeTemplate extends AppCompatActivity {
         } else {
             Log.e("FirebaseStorage", "No file selected");
         }
-
-        /*if (fileUri2 != null) {
-            StorageReference riversRef2 = mStorageRef.child("VideosRecipes/" + fileUri2.getLastPathSegment());
-
-            riversRef2.putFile(fileUri2)
-                    .addOnSuccessListener(taskSnapshot -> {
-                        riversRef2.getDownloadUrl().addOnCompleteListener(task -> {
-                            if (task.isSuccessful()) {
-                                downloadUri2 = task.getResult();
-                                videoUrl = downloadUri2.toString();
-                                isVideoUploaded[0] = true;
-
-                                if (isImageUploaded[0] && isVideoUploaded[0]) {
-                                    uploadRecipe();
-                                }
-                            }
-                        });
-                    })
-                    .addOnFailureListener(i -> {
-                        Log.e("FirebaseStorage", "Error uploading video: " + i.getMessage());
-                    });
-        } else {
-            Log.e("FirebaseStorage", "No file selected");
-        }*/
     }
 
     private void uploadRecipe() {
@@ -199,7 +179,6 @@ public class RecipeTemplate extends AppCompatActivity {
         data.put("ingredients", ingr.getText().toString());
         data.put("rating_recipes", 0.0);
         data.put("recipe_name", recipeTitle);
-        //data.put("",0);
         data.put("video_url", videoUrl.getText().toString());
         data.put("time", Integer.parseInt(time.getText().toString()));
         data.put("nutritional_info", nutritionalInfo);
@@ -217,8 +196,6 @@ public class RecipeTemplate extends AppCompatActivity {
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
         BitmapFactory.decodeFile(new File(uri.getPath()).getAbsolutePath(), options);
-        //int imageHeight = options.outHeight;
-        //int imageWidth = options.outWidth;
     }
     public void onButtonShowPopup(View view){
         LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);

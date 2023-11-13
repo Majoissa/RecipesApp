@@ -18,7 +18,7 @@
             android:clickable="true"
             android:ems="10"
             android:gravity="start|top"
-            android:hint="-Lorem ipsum sit amet"
+            android:hint="Nothing to see here."
             android:inputType="textMultiLine"
             android:textColor="#000000"
             android:textSize="22sp"
