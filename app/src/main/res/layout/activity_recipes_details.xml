@@ -43,8 +43,8 @@
 
                     <ImageButton
                         android:id="@+id/imageButton10"
-                        android:layout_width="65dp"
-                        android:layout_height="match_parent"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
                         android:background="@null"
                         android:clickable="true"
                         android:scaleType="centerCrop"
@@ -62,7 +62,7 @@
                         android:text="Recipe name"
                         android:textAlignment="center"
                         android:textColor="#000000"
-                        android:textSize="48sp" />
+                        android:textSize="38sp" />
                 </LinearLayout>
 
                 <ImageView
