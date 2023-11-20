@@ -36,7 +36,11 @@ public class CeldaAdapter extends RecyclerView.Adapter<CeldaAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Celda celda = celdas.get(position);
-        Picasso.get().load(celda.getImg_url()).into(holder.imatge);
+        Picasso.get().load(celda.getImg_url())
+                .resize(500, 500) // Ajusta el tamaño según sea necesario
+                .centerCrop()
+                .into(holder.imatge);
+
         holder.titul.setText(celda.getRecipe_name());
         holder.valoracio.setRating((float) celda.getRating_recipes());
         holder.totalreviews.setText(celda.getTotalReviews());
