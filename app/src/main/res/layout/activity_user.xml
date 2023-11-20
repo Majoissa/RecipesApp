@@ -11,7 +11,7 @@
         android:id="@+id/view2"
         android:layout_width="414dp"
         android:layout_height="66dp"
-        android:background="#FFD8A9"
+        android:background="#F4EFEF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.666"
@@ -45,8 +45,9 @@
 
     <ImageButton
         android:id="@+id/imageButton4"
-        android:layout_width="72dp"
-        android:layout_height="64dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="10dp"
         android:background="@null"
         android:clickable="true"
         android:onClick="HomeButton"
@@ -58,9 +59,9 @@
 
     <ImageButton
         android:id="@+id/imageButton6"
-        android:layout_width="51dp"
-        android:layout_height="37dp"
-        android:layout_marginBottom="16dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="10dp"
         android:background="@null"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -71,8 +72,9 @@
 
     <ImageButton
         android:id="@+id/imageButton5"
-        android:layout_width="74dp"
-        android:layout_height="71dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="10dp"
         android:background="@null"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
