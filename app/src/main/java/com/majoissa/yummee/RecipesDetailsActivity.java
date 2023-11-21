@@ -1,8 +1,10 @@
 package com.majoissa.yummee;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -26,6 +28,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.dynamiclinks.DynamicLink;
+import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -67,6 +71,7 @@ public class RecipesDetailsActivity extends AppCompatActivity {
     private TextView recipeDirections;
     private TextView recipeDuration;
     private ImageButton toTop;
+    private ImageButton shareRecipe;
     private ScrollView scrollView;
     private Button nutriButton;
     private ImageButton favButton;
@@ -77,9 +82,11 @@ public class RecipesDetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipes_details);
+
         recipeId = getIntent().getStringExtra("recipeId");
+
         if (recipeId == null) {
-            Toast.makeText(this, "Recipe ID is missing!", Toast.LENGTH_LONG).show();
+            Toast.makeText(RecipesDetailsActivity.this, "No ID", Toast.LENGTH_SHORT).show();
             finish();
             return;
         }
@@ -99,6 +106,7 @@ public class RecipesDetailsActivity extends AppCompatActivity {
         nutriButton = findViewById(R.id.button3);
         favButton = findViewById(R.id.imageButton9);
         goToLikes = findViewById(R.id.imageButton12);
+        shareRecipe = findViewById(R.id.imageButton11);
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -159,6 +167,19 @@ public class RecipesDetailsActivity extends AppCompatActivity {
             }
         });
         checkIfLiked();
+        shareRecipe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Uri generatedUrl = createDynamicUri(Uri.parse("https://yummee.page.link/recipe/" + recipeId));
+
+                Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                shareIntent.setType("text/plain");
+                shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Compartir Receta");
+                shareIntent.putExtra(Intent.EXTRA_TEXT, "Look at this recipe \uD83D\uDE0B " + String.valueOf(generatedUrl));
+
+                startActivity(Intent.createChooser(shareIntent, "Compartir Receta"));
+            }
+        });
     }
 
     private void loadRecipeDetails() {
@@ -182,7 +203,6 @@ public class RecipesDetailsActivity extends AppCompatActivity {
 
         getLifecycle().addObserver(recipeVideo);
 
-        // Asigna los valores a tus Views
         recipeName.setText(recipeNameString);
         Picasso.get().load(recipeImgString).into(recipeImg);
         recipeVideo.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
@@ -392,5 +412,18 @@ public class RecipesDetailsActivity extends AppCompatActivity {
             return matcher.group(1);
         }
         return null;
+    }
+    private Uri createDynamicUri(Uri myUri) {
+        DynamicLink.AndroidParameters.Builder androidParametersBuilder = new DynamicLink.AndroidParameters.Builder(this.getPackageName());
+        androidParametersBuilder.setFallbackUrl(Uri.parse("https://github.com/Majoissa/RecipesApp"));
+
+        DynamicLink.Builder linkBuilder = FirebaseDynamicLinks.getInstance().createDynamicLink()
+                .setLink(myUri)
+                .setDomainUriPrefix("https://yummee.page.link")
+                .setAndroidParameters(androidParametersBuilder.build());
+
+        Uri dynamicLinkUri = linkBuilder.buildDynamicLink().getUri();
+
+        return dynamicLinkUri;
     }
 }
