@@ -88,6 +88,7 @@
                     android:layout_marginTop="32dp"
                     android:fontFamily="@font/amaranth_bold"
                     android:text="Add a video link"
+                    android:textColor="#000000"
                     android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/imageView10" />
@@ -100,6 +101,7 @@
                     android:layout_marginTop="20dp"
                     android:fontFamily="@font/amaranth_bold"
                     android:text="Ingredients"
+                    android:textColor="#000000"
                     android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/videoView2" />
@@ -129,6 +131,7 @@
                     android:layout_marginTop="42dp"
                     android:fontFamily="@font/amaranth_bold"
                     android:text="Directions"
+                    android:textColor="#000000"
                     android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/editTextTextMultiLine2" />

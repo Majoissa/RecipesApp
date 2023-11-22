@@ -46,6 +46,7 @@
                         android:layout_weight="1"
                         android:fontFamily="@font/amaranth_bold"
                         android:text="majoissa@gmail.com"
+                        android:textColor="#000000"
                         android:textSize="18dp" />
 
                     <TextView
@@ -55,7 +56,8 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:text="TextView"
-                        android:textAlignment="center" />
+                        android:textAlignment="center"
+                        android:textColor="#000000" />
 
                 </LinearLayout>
 
@@ -93,6 +95,7 @@
                 android:padding="10dp"
                 android:text="Amazing recipe, i will make it agan. I loved it, thanks"
                 android:textAlignment="center"
+                android:textColor="#000000"
                 android:textSize="18dp" />
 
         </LinearLayout>

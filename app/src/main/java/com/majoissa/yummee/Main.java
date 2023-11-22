@@ -136,7 +136,7 @@ public class Main extends AppCompatActivity {
             CeldaAdapter adapter = new CeldaAdapter(celdas);
             recyclerView.setAdapter(adapter);
         } else {
-            Toast.makeText(Main.this, "No se encontraron recetas", Toast.LENGTH_SHORT).show();
+            Toast.makeText(Main.this, "No recipes found", Toast.LENGTH_SHORT).show();
             recyclerView.setAdapter(null);
         }
     }
