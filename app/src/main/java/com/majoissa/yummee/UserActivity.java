@@ -30,6 +30,7 @@ public class UserActivity extends AppCompatActivity {
     private ImageButton home;
     private ImageButton logout;
     private ImageButton back;
+    private ImageButton favorite;
     private TextView userName;
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
@@ -51,6 +52,7 @@ public class UserActivity extends AppCompatActivity {
         logout = findViewById(R.id.imageButton2);
         home = findViewById(R.id.imageButton4);
         back = findViewById(R.id.imageButton);
+        favorite = findViewById(R.id.imageButton5);
 
         buttons = new Buttons(this);
 
@@ -74,6 +76,12 @@ public class UserActivity extends AppCompatActivity {
             public void onClick(View view) {
                 logout.setEnabled(false);
                 onButtonShowPopup(view);
+            }
+        });
+        favorite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                buttons.FavoriteButton(view);
             }
         });
         loadCeldas();
