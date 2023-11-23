@@ -72,6 +72,7 @@
                     android:fontFamily="@font/baloo_bhai"
                     android:hint="Time: -- min"
                     android:inputType="time"
+                    android:maxLength="3"
                     android:textAlignment="center"
                     android:textColor="#000000"
                     android:textSize="24sp"

@@ -1,4 +1,5 @@
 package com.majoissa.yummee;
+
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -6,13 +7,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 public class CeldaAdapter extends RecyclerView.Adapter<CeldaAdapter.ViewHolder> {
@@ -74,6 +76,7 @@ public class CeldaAdapter extends RecyclerView.Adapter<CeldaAdapter.ViewHolder> 
                 intent.putExtra("ratingRecipe", celda.getRating_recipes());
                 intent.putExtra("recipeDuration", celda.getTime());
                 intent.putExtra("recipeNutrition", celda.getNutritional_info());
+                intent.putExtra("recipeCreator", celda.getCreator());
                 view.getContext().startActivity(intent);
             }
         });

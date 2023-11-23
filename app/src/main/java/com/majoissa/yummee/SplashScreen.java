@@ -69,6 +69,7 @@ public class SplashScreen extends AppCompatActivity {
                                                         intent.putExtra("ratingRecipe", document.getDouble("rating_recipes"));
                                                         intent.putExtra("recipeDuration", document.getDouble("time").intValue());
                                                         intent.putExtra("recipeNutrition", document.getString("nutritional_info"));
+                                                        intent.putExtra("recipeCreator", document.getString("creator"));
                                                         startActivity(intent);
                                                         finish();
                                                         return;

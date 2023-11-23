@@ -1,5 +1,6 @@
 package com.majoissa.yummee;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -10,6 +11,7 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -76,6 +78,9 @@ public class RecipesDetailsActivity extends AppCompatActivity {
     private Button nutriButton;
     private ImageButton favButton;
     private boolean favorited = false;
+    private TextView leaveComment;
+    private String recipeCreator;
+    private TextView noComments;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     @Override
@@ -91,8 +96,6 @@ public class RecipesDetailsActivity extends AppCompatActivity {
             return;
         }
 
-        loadRecipeDetails();
-
         db = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
         buttons = new Buttons(this);
@@ -107,6 +110,26 @@ public class RecipesDetailsActivity extends AppCompatActivity {
         favButton = findViewById(R.id.imageButton9);
         goToLikes = findViewById(R.id.imageButton12);
         shareRecipe = findViewById(R.id.imageButton11);
+        leaveComment = findViewById(R.id.textView18);
+        recipeRating = findViewById(R.id.ratingRecipes);
+        noComments = findViewById(R.id.textView24);
+        recipeCreator = getIntent().getStringExtra("recipeCreator");
+
+        if (recipeCreator != null && !recipeCreator.isEmpty()) {
+            if (recipeCreator.equals(mAuth.getCurrentUser().getEmail())) {
+                recipeRating.setEnabled(false);
+                addComment.setEnabled(false);
+                post.setEnabled(false);
+                leaveComment.setEnabled(false);
+                recipeRating.setVisibility(View.GONE);
+                addComment.setVisibility(View.GONE);
+                post.setVisibility(View.INVISIBLE);
+                leaveComment.setVisibility(View.GONE);
+            }
+        }
+
+        loadRecipeDetails();
+
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -138,7 +161,13 @@ public class RecipesDetailsActivity extends AppCompatActivity {
         post.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                putComment();
+                if (addComment.getText().toString().isEmpty()) {
+                    Toast.makeText(RecipesDetailsActivity.this, "Please add text to your comment.", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    noComments.setVisibility(View.GONE);
+                    putComment();
+                }
             }
         });
         toTop.setOnClickListener(new View.OnClickListener() {
@@ -198,7 +227,7 @@ public class RecipesDetailsActivity extends AppCompatActivity {
         recipeVideo = findViewById(R.id.videoView);
         recipeIngredients = findViewById(R.id.ingredientes);
         recipeDirections = findViewById(R.id.textView13);
-        recipeRating = findViewById(R.id.ratingRecipes);
+
         recipeDuration = findViewById(R.id.textView7);
 
         getLifecycle().addObserver(recipeVideo);
@@ -247,6 +276,10 @@ public class RecipesDetailsActivity extends AppCompatActivity {
                         adapter.notifyDataSetChanged();
                     }
                 });
+        View view = this.getCurrentFocus();
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        addComment.setText("");
     }
     private void loadComments() {
         // Accede a la subcolección "Comments" de la receta
@@ -267,6 +300,12 @@ public class RecipesDetailsActivity extends AppCompatActivity {
                         }
                         // Notifica al adaptador de que se realizaron cambios en la lista
                         adapter.notifyDataSetChanged();
+                        if (celdas.isEmpty()) {
+                            noComments.setVisibility(View.VISIBLE);
+                        }
+                        else {
+                            noComments.setVisibility(View.GONE);
+                        }
                     }
                 });
 
@@ -417,9 +456,13 @@ public class RecipesDetailsActivity extends AppCompatActivity {
         DynamicLink.AndroidParameters.Builder androidParametersBuilder = new DynamicLink.AndroidParameters.Builder(this.getPackageName());
         androidParametersBuilder.setFallbackUrl(Uri.parse("https://github.com/Majoissa/RecipesApp"));
 
+        DynamicLink.IosParameters.Builder iosParametersBuilder = new DynamicLink.IosParameters.Builder(this.getPackageName());
+        iosParametersBuilder.setFallbackUrl(Uri.parse("https://github.com/Majoissa/RecipesApp"));
+
         DynamicLink.Builder linkBuilder = FirebaseDynamicLinks.getInstance().createDynamicLink()
                 .setLink(myUri)
                 .setDomainUriPrefix("https://yummee.page.link")
+                .setIosParameters(iosParametersBuilder.build())
                 .setAndroidParameters(androidParametersBuilder.build());
 
         Uri dynamicLinkUri = linkBuilder.buildDynamicLink().getUri();
