@@ -10,6 +10,7 @@ public class Celda {
     private String video_url;
     private String nutritional_info;
     private int time;
+    private String creator;
     public Celda() {
         // Constructor sin argumentos necesario para Firestore
     }
@@ -51,4 +52,7 @@ public class Celda {
     }
     public int getTime() { return time; }
     public String getNutritional_info() { return nutritional_info; }
+    public String getCreator() {
+        return creator;
+    }
 }
